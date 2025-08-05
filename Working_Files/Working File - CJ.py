@@ -3,6 +3,9 @@ import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
+import json
+from urllib.request import urlopen
+import plotly.express as px
 
 FARA = pd.read_csv('../data/FARA.csv')
 AZ_FARA = FARA[FARA['State'] == 'Arizona']
@@ -293,11 +296,12 @@ WeightedMerged2
 
 FARA = pd.read_csv ('../data/FARA.csv')
 FARA = FARA[FARA['State'] == 'Arizona']
-PLACES2020 = pd.read_csv('../data/PLACES.csv')
+PLACES2020 = pd.read_csv('../data/PLACES2020.csv')
 PLACES2020 = PLACES2020[PLACES2020['StateAbbr'] == 'AZ']
 Columns_to_extract = ['CensusTract','TractWhite','TractBlack','TractAsian','TractNHOPI','TractAIAN','TractOMultir','TractHispanic']
 PLACES_Columns_to_extract = ['OBESITY_CrudePrev','DIABETES_CrudePrev','TractFIPS','CountyName']
 PLACES2020_Race = PLACES2020[PLACES_Columns_to_extract]
+PLACES2020_Race
 FARA_IMP = FARA[Columns_to_extract]
 FARA_IMP = FARA_IMP.rename(columns = {'CensusTract' : 'TractFIPS'})
 FARA_IMP = FARA_IMP.groupby('TractFIPS').sum()
@@ -345,14 +349,15 @@ Merged_By_Race['%OMultirDiabetes'] = Merged_By_Race['OMultirDiabetes']/Merged_By
 Merged_By_Race['%OMultirObesity'] = Merged_By_Race['OMultirObesity']/Merged_By_Race['TractOMultir']
 Merged_By_Race['%HispanicDiabetes'] = Merged_By_Race['HispanicDiabetes']/Merged_By_Race['TractHispanic']
 Merged_By_Race['%HispanicObesity'] = Merged_By_Race['HispanicObesity']/Merged_By_Race['TractHispanic']
-Merged_By_Race['year'] = '2020'
+Merged_By_Race['year'] = '2018'
 Merged_By_Race
 
 
 
-PLACES2021 = pd.read_csv('../data/PLACES.csv')
+PLACES2021 = pd.read_csv('../data/PLACES2021.csv')
 PLACES2021 = PLACES2021[PLACES2021['StateAbbr'] == 'AZ']
 PLACES2021_Race = PLACES2021[PLACES_Columns_to_extract]
+PLACES2021_Race
 Merged_By_Race_2021 = pd.merge(PLACES2021_Race, FARA_IMP, on = 'TractFIPS', how = 'left')
 Merged_By_Race_2021['WhiteDiabetes'] = Merged_By_Race_2021['TractWhite'] * Merged_By_Race_2021['DIABETES_CrudePrev']/100
 Merged_By_Race_2021['WhiteObesity'] = Merged_By_Race_2021['TractWhite'] * Merged_By_Race_2021['OBESITY_CrudePrev']/100
@@ -397,14 +402,14 @@ Merged_By_Race_2021['%OMultirDiabetes'] = Merged_By_Race_2021['OMultirDiabetes']
 Merged_By_Race_2021['%OMultirObesity'] = Merged_By_Race_2021['OMultirObesity']/Merged_By_Race_2021['TractOMultir']
 Merged_By_Race_2021['%HispanicDiabetes'] = Merged_By_Race_2021['HispanicDiabetes']/Merged_By_Race_2021['TractHispanic']
 Merged_By_Race_2021['%HispanicObesity'] = Merged_By_Race_2021['HispanicObesity']/Merged_By_Race_2021['TractHispanic']
-Merged_By_Race_2021['year'] = '2021'
+Merged_By_Race_2021['year'] = '2019'
 Merged_By_Race_2021
 
 
-PLACES2022 = pd.read_csv('../data/PLACES.csv')
+PLACES2022 = pd.read_csv('../data/PLACES2022.csv')
 PLACES2022 = PLACES2022[PLACES2022['StateAbbr'] == 'AZ']
 PLACES2022_Race = PLACES2022[PLACES_Columns_to_extract]
-Merged_By_Race_2022 = pd.merge(PLACES2020_Race, FARA_IMP, on = 'TractFIPS', how = 'left')
+Merged_By_Race_2022 = pd.merge(PLACES2022_Race, FARA_IMP, on = 'TractFIPS', how = 'left')
 Merged_By_Race_2022['WhiteDiabetes'] = Merged_By_Race_2022['TractWhite'] * Merged_By_Race_2022['DIABETES_CrudePrev']/100
 Merged_By_Race_2022['WhiteObesity'] = Merged_By_Race_2022['TractWhite'] * Merged_By_Race_2022['OBESITY_CrudePrev']/100
 Merged_By_Race_2022['WhiteNoDiabetes'] = Merged_By_Race_2022['TractWhite'] * (100-Merged_By_Race_2022['DIABETES_CrudePrev'])/100
@@ -448,13 +453,14 @@ Merged_By_Race_2022['%OMultirDiabetes'] = Merged_By_Race_2022['OMultirDiabetes']
 Merged_By_Race_2022['%OMultirObesity'] = Merged_By_Race_2022['OMultirObesity']/Merged_By_Race_2022['TractOMultir']
 Merged_By_Race_2022['%HispanicDiabetes'] = Merged_By_Race_2022['HispanicDiabetes']/Merged_By_Race_2022['TractHispanic']
 Merged_By_Race_2022['%HispanicObesity'] = Merged_By_Race_2022['HispanicObesity']/Merged_By_Race_2022['TractHispanic']
-Merged_By_Race_2022['year'] = '2022'
+Merged_By_Race_2022['year'] = '2020'
 Merged_By_Race_2022
 
-PLACES2023 = pd.read_csv('../data/PLACES.csv')
+PLACES2023 = pd.read_csv('../data/PLACES2023.csv')
 PLACES2023 = PLACES2023[PLACES2023['StateAbbr'] == 'AZ']
 PLACES2023_Race = PLACES2023[PLACES_Columns_to_extract]
-Merged_By_Race_2023 = pd.merge(PLACES2020_Race, FARA_IMP, on = 'TractFIPS', how = 'left')
+PLACES2023_Race
+Merged_By_Race_2023 = pd.merge(PLACES2023_Race, FARA_IMP, on = 'TractFIPS', how = 'left')
 Merged_By_Race_2023['WhiteDiabetes'] = Merged_By_Race_2023['TractWhite'] * Merged_By_Race_2023['DIABETES_CrudePrev']/100
 Merged_By_Race_2023['WhiteObesity'] = Merged_By_Race_2023['TractWhite'] * Merged_By_Race_2023['OBESITY_CrudePrev']/100
 Merged_By_Race_2023['WhiteNoDiabetes'] = Merged_By_Race_2023['TractWhite'] * (100-Merged_By_Race_2023['DIABETES_CrudePrev'])/100
@@ -498,13 +504,14 @@ Merged_By_Race_2023['%OMultirDiabetes'] = Merged_By_Race_2023['OMultirDiabetes']
 Merged_By_Race_2023['%OMultirObesity'] = Merged_By_Race_2023['OMultirObesity']/Merged_By_Race_2023['TractOMultir']
 Merged_By_Race_2023['%HispanicDiabetes'] = Merged_By_Race_2023['HispanicDiabetes']/Merged_By_Race_2023['TractHispanic']
 Merged_By_Race_2023['%HispanicObesity'] = Merged_By_Race_2023['HispanicObesity']/Merged_By_Race_2023['TractHispanic']
-Merged_By_Race_2023['year'] = '2023'
+Merged_By_Race_2023['year'] = '2021'
 Merged_By_Race_2023
 
-PLACES2024 = pd.read_csv('../data/PLACES.csv')
+PLACES2024 = pd.read_csv('../data/PLACES2024.csv')
 PLACES2024 = PLACES2024[PLACES2024['StateAbbr'] == 'AZ']
 PLACES2024_Race = PLACES2024[PLACES_Columns_to_extract]
-Merged_By_Race_2024 = pd.merge(PLACES2020_Race, FARA_IMP, on = 'TractFIPS', how = 'left')
+PLACES2024_Race
+Merged_By_Race_2024 = pd.merge(PLACES2024_Race, FARA_IMP, on = 'TractFIPS', how = 'left')
 Merged_By_Race_2024['WhiteDiabetes'] = Merged_By_Race_2024['TractWhite'] * Merged_By_Race_2024['DIABETES_CrudePrev']/100
 Merged_By_Race_2024['WhiteObesity'] = Merged_By_Race_2024['TractWhite'] * Merged_By_Race_2024['OBESITY_CrudePrev']/100
 Merged_By_Race_2024['WhiteNoDiabetes'] = Merged_By_Race_2024['TractWhite'] * (100-Merged_By_Race_2024['DIABETES_CrudePrev'])/100
@@ -548,7 +555,7 @@ Merged_By_Race_2024['%OMultirDiabetes'] = Merged_By_Race_2024['OMultirDiabetes']
 Merged_By_Race_2024['%OMultirObesity'] = Merged_By_Race_2024['OMultirObesity']/Merged_By_Race_2024['TractOMultir']
 Merged_By_Race_2024['%HispanicDiabetes'] = Merged_By_Race_2024['HispanicDiabetes']/Merged_By_Race_2024['TractHispanic']
 Merged_By_Race_2024['%HispanicObesity'] = Merged_By_Race_2024['HispanicObesity']/Merged_By_Race_2024['TractHispanic']
-Merged_By_Race_2024['year'] = '2024'
+Merged_By_Race_2024['year'] = '2022'
 Merged_By_Race_2024
 
 Concated_By_Race = pd.concat([Merged_By_Race, Merged_By_Race_2021, Merged_By_Race_2022, Merged_By_Race_2023, Merged_By_Race_2024]).reset_index()
@@ -557,3 +564,51 @@ Important_Columns = ['CountyName','year','%WhiteDiabetes','%WhiteObesity','%Blac
                      '%HispanicDiabetes','%HispanicObesity']
 Unioned_Data_By_Race = Concated_By_Race[Important_Columns]
 Unioned_Data_By_Race
+
+CountyFIPSCode = {'CountyName' : ['Apache','Cochise','Coconino','Gila','Graham','Greenlee','La Paz','Maricopa','Mohave','Navajo','Pima','Pinal','Santa Cruz','Yavapai','Yuma'], 'FIPS_Code' : ['04001','04003','04005','04007','04009','04011','04012','04013','04015','04017','04019','04021','04023','04025','04027']}
+CountyFIPSCode = pd.DataFrame(data = CountyFIPSCode)
+CountyFIPSCode
+
+Unioned_Data_FIPS = pd.merge(Unioned_Data_By_Race, CountyFIPSCode, on = 'CountyName', how = 'left')
+Unioned_Data_FIPS
+
+
+
+with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
+    counties_geojson = json.load(response)
+
+fig1 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
+                    locations = 'FIPS_Code', color = '%AIANDiabetes',
+                    color_continuous_scale = "Viridis",scope = "usa",
+                    animation_frame = 'year',
+                    labels = {'%AIANDiabetes':'AIANDiabetes'},
+                    title = 'County Heatmap AIAN Diabetes',
+                    range_color = [0.1,0.25])
+fig1.show()
+
+fig2 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
+                    locations = 'FIPS_Code', color = '%AIANObesity',
+                    color_continuous_scale = "Viridis",scope = "usa",
+                    animation_frame = 'year',
+                    labels = {'%AIANObesity':'AIANObesity'},
+                    title = 'County Heatmap AIAN Obesity',
+                    range_color = [0.1,0.5])
+fig2.show()
+
+fig3 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
+                    locations = 'FIPS_Code', color = '%WhiteDiabetes',
+                    color_continuous_scale = "Viridis",scope = "usa",
+                    animation_frame = 'year',
+                    labels = {'%WhiteDiabetes':'WhiteDiabetes'},
+                    title = 'County Heatmap White Diabetes',
+                    range_color = [0.1,0.25])
+fig3.show()
+
+fig4 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
+                    locations = 'FIPS_Code', color = '%WhiteObesity',
+                    color_continuous_scale = "Viridis",scope = "usa",
+                    animation_frame = 'year',
+                    labels = {'%WhiteObesity':'WhiteObesity'},
+                    title = 'County Heatmap White Obesity',
+                    range_color = [0.1,0.5])
+fig4.show()
