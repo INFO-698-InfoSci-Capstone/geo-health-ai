@@ -43,9 +43,9 @@ Dataset 1: CDC PLACES Census Tract Data (2020–2024 releases): Provides modeled
 Dataset 2: USDA Food Access Research Atlas (FARA): Identifies tracts with low access to grocery stores, often used to define food deserts. Includes tract population counts and demographic data. Data reflects 2010 census tract information.
 
 | Dataset | Key Variables | Purpose | Source |
-|---------|:-----|------:|:------:|
-| CDC Places (releases 2020-2024; reflects BRFSS from ~2018-2022)     | OBESITY_CrudePrev, DIABETES_CrudePrev, CANCER_CrudePrev(plus tract IDs like TractFIPS, CountyName for joins)   |    Modeled prevalence estimates for chronic conditions and risk factors at the census tract level across the U.S. |   CDC Places (link)   |
-| USDA Food Access Research Atlas     | Food access indicators: LILATracts_1And10, LILATracts_halfAnd10, LILATracts_Vehicle, LATracts1/10/20 • Socioeconomics: PovertyRate, LowIncomeTracts, MedianFamilyIncome • Demographics: tract population by race • Geography: TractFIPS, CountyName  |   Classifies census tracts by low income/low access to supermarkets; includes demographics and socioeconomics for each tract |  USDA FARA (link)   |
+|---|---|---|---|
+| **CDC PLACES (Census Tract)** — releases 2020–2024 *(BRFSS ~2018–2022)* | OBESITY_CrudePrev, DIABETES_CrudePrev, CANCER_CrudePrev; TractFIPS, CountyName | Provide tract-level health outcomes for correlation/regression with food access & poverty; flag high-burden tracts (z-scores); enable multi-year trends. | https://data.cdc.gov/500-Cities-Places/PLACES-Census-Tract-Data-GIS-Friendly-Format-2020-/ib3w-k9rq/about_data |
+| **USDA Food Access Research Atlas (FARA)** | LILATracts_1And10, LILATracts_halfAnd10, LILATracts_Vehicle, LATracts1/10/20; PovertyRate, LowIncomeTracts, MedianFamilyIncome; tract population by race; TractFIPS, CountyName | Operationalize food-desert severity and socioeconomic context; supply demographics for disparity analysis; provide join keys to align with PLACES. | https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data |
 
 These publicly available datasets collectively cover 1,516–1,520 census tracts across Arizona, including rural, metro, and tribal lands.These datasets reflect data from 2018-2022, effectively capturing pre-pandemic, pandemic, and post-pandemic health and disease prevalence within Arizona communities. This series of data allows for the added element of time as an analysis option when exploring the relationship between food accessibility and chronic health outcomes within these tracts. 
 
