@@ -1,0 +1,13 @@
+---
+title: "About"
+format: html
+editor: visual
+---
+
+This capstone research project was developed for INFO 698 - InfoSci Capstone at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members:
+
+-   Sarah Gilbride: 
+
+-   Remi Hendershott: 
+
+-   Cole Johnson: 

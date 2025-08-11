@@ -1,0 +1,29 @@
+project:
+  type: website     
+
+website:
+  title: GeoHealthAI
+  navbar:
+    right:
+      - icon: github
+        href: https://github.com/INFO-698-InfoSci-Capstone/geo-health-ai
+    left:
+      - text: Project
+        href: index.qmd
+      - text: Proposal
+        href: proposal.qmd
+      - text: About
+        href: about.qmd
+
+
+format:
+  html:
+    embed-resources: true
+    keep-shiny: true
+    theme:
+      light: flatly
+      dark: darkly
+    toc: true
+
+execute:
+  freeze: auto
