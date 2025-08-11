@@ -5,7 +5,7 @@ author:
   - name: "Remi Hendershott, Sarah Gilbride, & Cole Johnson"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "GeoHealthAI is a data science initiative aimed at identifying and visualizing food deserts and chronic disease risk zones across Arizona, with a focus on Native Nations. By combining tract-level public health data, USDA food access metrics, and spatial socioeconomic indicators, the project seeks to explore the relationship between food accessibility, poverty, and chronic health outcomes such as obesity and diabetes."
+description: "GeoHealthAI is a data science initiative aimed at identifying and visualizing food deserts and chronic disease risk zones across Arizona, with a focus on Native Nations; seeking to explore the relationship between food accessibility, poverty, and chronic health outcomes such as obesity and diabetes."
 format:
    html:
     code-tools: true
@@ -16,3 +16,72 @@ execute:
   warning: false
   echo: false
 ---
+
+## Abstract
+
+GeoHealthAI quantifies and maps the overlap of food access, poverty, and chronic disease in Arizona—with particular attention to Native Nations—using tract-level data from CDC PLACES, the USDA Food Access Research Atlas, and socioeconomic indicators. Using PySpark and Pandas, we integrate sources by tract FIPS and conduct descriptive analyses, correlation matrices, linear regressions, and z-score flagging to identify high-burden tracts. We deploy an interactive heatmap dashboard to surface priority areas and pair the analytics with interviews that center Native perspectives, providing culturally grounded context for community-informed public health action.
+
+## Introduction
+
+GeoHealthAI is a data science initiative aimed at identifying and visualizing food deserts and chronic disease risk zones across Arizona, with a focus on Native Nations. By combining tract-level public health data, USDA food access metrics, and spatial socioeconomic indicators, the project seeks to explore the relationship between food accessibility, poverty, and chronic health outcomes such as obesity and diabetes. We used PySpark for the data wrangling and processing, accompanied with Python’s Pandas to generate visualizations and perform analysis. Our goal is not only to explore statistical correlations, but to generate an interactive heatmap dashboard and identify high-risk areas for targeted public health interventions.
+
+### Questions
+
+Question 1: How does the intersection of food access, poverty, and geography contribute to the burden of chronic disease in Arizona?
+Question 2: How does this vary between rural Native Nations and Urban areas?
+
+### Data Journalism 
+
+In addition to quantitative analysis, we are pursuing a data journalism approach to center Native voices and cultural context. We are conducting interviews with community members and cultural experts, including the owner of the Toadlena Trading Post and locals who reside on the Tohono O’odham Nation land, to understand barriers to healthcare access and traditional food systems. These narratives will help us interpret our findings through the lens of Indigenous experience — including questions about trust in Western medicine, infrastructure gaps, and tribal-led health solutions. The journalism piece will serve as a vital human-centered supplement to our statistical insights, bridging data and lived experience.
+
+## Data Analysis & Methodology 
+
+### Data 
+
+We use two main datasets in this project:
+Dataset 1: CDC PLACES Census Tract Data (2020–2024 releases): Provides modeled estimates of chronic disease prevalence at the census tract level. Datasets reflect Behavioral Risk Factor Surveillance System (BRFSS) data from two years prior. The 2020-2024 released datasets cover the years 2018-2020, respectively.
+Dataset 2: USDA Food Access Research Atlas (FARA): Identifies tracts with low access to grocery stores, often used to define food deserts. Includes tract population counts and demographic data. Data reflects 2010 census tract information.
+
+| Dataset | Key Variables | Purpose | Source |
+|---------|:-----|------:|:------:|
+| CDC Places (releases 2020-2024; reflects BRFSS from ~2018-2022)     | OBESITY_CrudePrev, DIABETES_CrudePrev, CANCER_CrudePrev(plus tract IDs like TractFIPS, CountyName for joins)   |    Modeled prevalence estimates for chronic conditions and risk factors at the census tract level across the U.S. |   CDC Places (link)   |
+| USDA Food Access Research Atlas     | Food access indicators: LILATracts_1And10, LILATracts_halfAnd10, LILATracts_Vehicle, LATracts1/10/20 • Socioeconomics: PovertyRate, LowIncomeTracts, MedianFamilyIncome • Demographics: tract population by race • Geography: TractFIPS, CountyName  |   Classifies census tracts by low income/low access to supermarkets; includes demographics and socioeconomics for each tract |  USDA FARA (link)   |
+
+These publicly available datasets collectively cover 1,516–1,520 census tracts across Arizona, including rural, metro, and tribal lands.These datasets reflect data from 2018-2022, effectively capturing pre-pandemic, pandemic, and post-pandemic health and disease prevalence within Arizona communities. This series of data allows for the added element of time as an analysis option when exploring the relationship between food accessibility and chronic health outcomes within these tracts. 
+
+### Cleaning and Processing 
+
+Given the spatial and demographic complexity of our data, we chose a combination of PySpark and Pandas for scalable processing and exploratory data analysis. We employ:
+1. Descriptive analysis (.describe, null checks, distribution plots)
+2. Correlation matrices (to assess relationships between variables)
+3. Regression modeling (linear models to predict disease rates based on food access and income)
+4. Z-score flagging (to identify outliers and high-burden tracts)
+
+This multi-pronged approach allows us to identify both global trends (e.g., statewide patterns in obesity) and local outliers (e.g., specific tribal tracts with extreme health burdens).
+
+We aligned all datasets by tract FIPS codes, dropping mismatches (only 4 missing across FARA/PLACES). We also created flags using z-scores to identify tracts that are >2 standard deviations above average in obesity, diabetes, or food desert burden.
+Regression coefficients were calculated that showed us that poverty rate, food access and healthcare access are strong predictors of obesity and diabetes, supporting the focus of our risk modeling. CDC Places Cleaning: Dropped rows with nulls, verified tract IDs, ensured variable consistency across years (2020–2024). USDA Cleaning: Renamed flags for clarity; created a composite FoodDesertScore by summing key access indicators, simulated tract health data based on population race counts.
+
+## Literature Review 
+
+Research shows that food deserts are strongly linked to poor health outcomes such as obesity and diabetes, especially in rural and Native communities (Sallis et al., 2020). Navajo Nation and other tribal lands often face compounded barriers: vast distances to grocery stores, lack of transportation, and limited healthcare access (Hossain et al., 2021; Burnette et al., 2020). Prior studies have used survey data or point-based facility mapping, but recent work emphasizes the need for multi-scale geospatial modeling that combines satellite imagery with community-level health and infrastructure data.
+
+For example, Hossain et al. (2021) used remote sensing to map food deserts in tribal lands but did not integrate health outcomes. Burnette et al. (2020) conducted qualitative studies highlighting social determinants in Native communities but lacked spatial predictions. Kelli et al. (2019) identified the impact that low area income within a food desert appears to have on cardiovascular health, but did not isolate Native localities. Sallis et al. (2020) called for advanced spatial methods to visualize disparities more precisely.
+
+GeoHealthAI advances this frontier by embedding remote sensing features (e.g., greenery, urban density) and fusing them with CDC PLACES and USDA food access metrics. The project’s novelty lies in its integrated, tract-level approach and scalable machine learning deployment. Users of this tool — including tribal policymakers, public health planners, and researchers — need an interactive, evidence-based map to pinpoint priority areas for food and health interventions.
+
+## Results 
+
+## Discussion 
+
+## Limitations & Future Work 
+
+One key limitation of our analysis lies in the accuracy and completeness of demographic data—particularly for tribal lands. The available data on tracts containing Native American tribal nations likely underrepresents the true population and health dynamics of these communities due to historical undercounting, outdated boundaries, or incomplete reporting. This makes it difficult to draw fully representative conclusions about health disparities in these areas. 
+
+Additionally, our population data for Arizona tracts is sourced from 2021 food access research atlas data that uses the 2010 Census, which is now significantly outdated. Given the rapid growth and shifting demographics in many parts of the state, especially urban and suburban regions, this outdated baseline introduces uncertainty into our calculated prevalence rates and comparisons across counties and racial groups.
+
+Data for calculated prevalence across racial groups was used based on simulated data using the quantity of people of a given race in a tract, multiplied by the overall prevalence rate within that specific tract. If different racial groups have different prevalence rates within a tract, the actual data might be slightly different than our simulated data.
+
+For future work, access to more current population estimates—such as from the 2020 Census or intercensal updates—would enhance the reliability of our analyses. With updated population data, we could refine prevalence rate calculations, improve normalization across counties and racial categories, and make stronger, more actionable conclusions. Moreover, incorporating additional data sources specific to tribal nations or partnering with tribal epidemiology centers could provide a more accurate and nuanced view of Native health outcomes and the structural factors driving disparities.
+
+## References 
