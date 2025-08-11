@@ -1,0 +1,18 @@
+---
+title: "GeoHealthAI"
+subtitle: "INFO 698 - Summer 2025 - Capstone Project"
+author: 
+  - name: "Remi Hendershott, Sarah Gilbride, & Cole Johnson"
+    affiliations:
+      - name: "School of Information, University of Arizona"
+description: "Datasets & Code"
+format:
+   html:
+    code-tools: true
+    code-overflow: wrap
+    embed-resources: true
+editor: visual
+execute:
+    warning: false
+    echo: false
+---
