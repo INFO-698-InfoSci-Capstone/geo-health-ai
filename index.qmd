@@ -5,7 +5,7 @@ author:
   - name: "Remi Hendershott, Sarah Gilbride, & Cole Johnson"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "GeoHealthAI is a data science initiative aimed at identifying and visualizing food deserts and chronic disease risk zones across Arizona, with a focus on Native Nations; seeking to explore the relationship between food accessibility, poverty, and chronic health outcomes such as obesity and diabetes."
+description: "GeoHealthAI analyzes and visualizes food access and chronic disease risk in Arizona, focusing on disparities in rural areas such as the Native Nations, to understand how food accessibility and poverty connect to diabetes & obesity disease rates."
 format:
    html:
     code-tools: true
@@ -19,7 +19,7 @@ execute:
 
 ## Abstract
 
-GeoHealthAI quantifies and maps the overlap of food access, poverty, and chronic disease in Arizona—with particular attention to Native Nations—using tract-level data from CDC PLACES, the USDA Food Access Research Atlas, and socioeconomic indicators. Using PySpark and Pandas, we integrate sources by tract FIPS and conduct descriptive analyses, correlation matrices, linear regressions, and z-score flagging to identify high-burden tracts. We deploy an interactive heatmap dashboard to surface priority areas and pair the analytics with interviews that center Native perspectives, providing culturally grounded context for community-informed public health action.
+GeoHealthAI quantifies and maps the overlap of food access, poverty, and chronic disease in Arizona—with particular attention to Native Nations—using tract-level data from CDC PLACES, the USDA Food Access Research Atlas, and socioeconomic indicators. Using PySpark and Pandas, we integrate sources by tract FIPS and conduct descriptive analyses, correlation matrices, linear regressions, and z-score flagging to identify high-burden tracts. We deploy an interactive dashboard, including a heatmap and supplemental visuals to surface priority areas. Beyond data analysis, we aim to pair the analytics with interviews that center Native perspectives, providing culturally grounded context for community-informed public health action.
 
 ## Introduction
 
@@ -53,17 +53,16 @@ These publicly available datasets collectively cover 1,516–1,520 census tracts
 
 ### Cleaning and Processing 
 
-Given the spatial and demographic complexity of our data, we chose a combination of PySpark and Pandas for scalable processing and exploratory data analysis. 
-* We employ:
-+ Descriptive analysis (.describe, null checks, distribution plots)
-+ Correlation matrices (to assess relationships between variables)
-+ Regression modeling (linear models to predict disease rates based on food access and income)
-+ Z-score flagging (to identify outliers and high-burden tracts)
+Given the spatial and demographic complexity of our data, we chose a combination of PySpark and Pandas for scalable processing and exploratory data analysis. We employ:
+
+- Descriptive analysis (.describe, null checks, distribution plots)
+- Correlation matrices (to assess relationships between variables)
+- Regression modeling (linear models to predict disease rates based on food access and income)
+- Z-score flagging (to identify outliers and high-burden tracts)
 
 This multi-pronged approach allows us to identify both global trends (e.g., statewide patterns in obesity) and local outliers (e.g., specific tribal tracts with extreme health burdens).
 
-We aligned all datasets by tract FIPS codes, dropping mismatches (only 4 missing across FARA/PLACES). We also created flags using z-scores to identify tracts that are >2 standard deviations above average in obesity, diabetes, or food desert burden.
-Regression coefficients were calculated that showed us that poverty rate, food access and healthcare access are strong predictors of obesity and diabetes, supporting the focus of our risk modeling. CDC Places Cleaning: Dropped rows with nulls, verified tract IDs, ensured variable consistency across years (2020–2024). USDA Cleaning: Renamed flags for clarity; created a composite FoodDesertScore by summing key access indicators, simulated tract health data based on population race counts.
+We first brought the CDC PLACES and USDA FARA tables onto the same footing by joining on census-tract FIPS; four records didn’t match across sources and were dropped. Within each dataset we tidied and harmonized fields: for CDC PLACES (2020–2024 releases) we verified tract IDs, aligned variable names across years, and removed rows with missing values; for the USDA atlas we clarified flag names and built a composite Food Desert Score by summing the key access indicators. Using tract population by race, we also generated race-specific health counts to support disparity analyses. After merging, we standardized variables and flagged tracts that were more than 2 SD above the statewide mean for obesity, diabetes, or food-desert burden. Finally, regression models showed that poverty, food access, and healthcare access are strong predictors of obesity and diabetes, which supports the focus of our risk modeling.
 
 ## Literature Review 
 
@@ -71,7 +70,7 @@ Research shows that food deserts are strongly linked to poor health outcomes suc
 
 For example, Hossain et al. (2021) used remote sensing to map food deserts in tribal lands but did not integrate health outcomes. Burnette et al. (2020) conducted qualitative studies highlighting social determinants in Native communities but lacked spatial predictions. Kelli et al. (2019) identified the impact that low area income within a food desert appears to have on cardiovascular health, but did not isolate Native localities. Sallis et al. (2020) called for advanced spatial methods to visualize disparities more precisely.
 
-GeoHealthAI advances this frontier by embedding remote sensing features (e.g., greenery, urban density) and fusing them with CDC PLACES and USDA food access metrics. The project’s novelty lies in its integrated, tract-level approach and scalable machine learning deployment. Users of this tool — including tribal policymakers, public health planners, and researchers — need an interactive, evidence-based map to pinpoint priority areas for food and health interventions.
+GeoHealthAI advances this work with an integrated, tract-level approach that fuses CDC PLACES health estimates with USDA food-access metrics to reveal where risks cluster. Our contribution is a clear, interactive heat-map that lets users explore patterns across race, poverty, and access—so tribal policymakers, public health planners, and researchers can quickly pinpoint priority areas for food and health interventions.
 
 ## Results 
 

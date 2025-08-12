@@ -5,7 +5,7 @@ author:
   - name: "Remi Hendershott, Sarah Gilbride, & Cole Johnson"
     affiliations:
       - name: "School of Information, University of Arizona"
-description: "GeoHealthAI is a data science initiative aimed at identifying and visualizing food deserts and chronic disease risk zones across Arizona, with a focus on Native Nations; seeking to explore the relationship between food accessibility, poverty, and chronic health outcomes such as obesity and diabetes."
+description: "GeoHealthAI analyzes and visualizes food access and chronic disease risk in Arizona, focusing on disparities in rural areas such as the Native Nations, to understand how food accessibility and poverty connect to diabetes & obesity disease rates."
 format:
   html:
     code-tools: true
