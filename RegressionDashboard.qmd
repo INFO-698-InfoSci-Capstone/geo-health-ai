@@ -1,23 +1,17 @@
 ---
 title: "GeoHealthAI"
 subtitle: "Regressions"
-format: dashboard
+format: html
 ---
 
-## Row {height=50%}
+## Type III ANOVA/ANCOVA Regressions for Obesity & Diabetes 
 
-```{python}
+![](images/updated_2x2_anova_reg.png)
 
-```
-```{python}
+## Quantile Regression for Diabetes Prevelance Rates 
 
-```
+![](images/dia_quant_reg.png)
 
-## Row {height=50%}
+## Quantile Regression for Obesity Prevelance Rates 
 
-```{python}
-
-```
-```{python}
-
-```
+![](images/ob_quant_reg.png)
