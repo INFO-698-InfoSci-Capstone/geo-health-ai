@@ -33,3 +33,12 @@ Obesity
 Diabetes
 <br>
 ![](images/Median Family Income vs. Diabetes Prevalence.png)
+
+## 2022 Percent of Tract Population that is Native vs Obesity and Diabetes by Tract and Food Desert Score
+Obesity
+<br>
+![](images/Tract Obesity Native FDS 2022.png)
+<br>
+Diabetes
+<br>
+![](images/Tract Diabetes Native FDS 2022.png)
