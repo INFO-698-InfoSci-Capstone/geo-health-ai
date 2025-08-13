@@ -10,17 +10,13 @@ website:
     left:
       - text: Project
         href: index.qmd
-      - text: Proposal
-        href: proposal.qmd
       - text: About
         href: about.qmd
-      - text: Code
-        href: code.qmd
       - text: Heatmap Dashboard
         href: dashboard.qmd
-      - text: EDA Dashboard
+      - text: EDA Infographics
         href: EDADashboard.qmd
-      - text: Regression Dashboard
+      - text: Regressions
         href: RegressionDashboard.qmd
 
 
