@@ -39,10 +39,9 @@ In addition to quantitative analysis, we are pursuing a data journalism approach
 ### Data 
 
 We use two main datasets in this project:
-- Dataset 1: CDC PLACES Census Tract Data (2020–2024 releases)
-Provides modeled estimates of chronic disease prevalence at the census tract level. Datasets reflect Behavioral Risk Factor Surveillance System (BRFSS) data from two years prior. The 2020-2024 released datasets cover the years 2018-2020, respectively.
-- Dataset 2: USDA Food Access Research Atlas (FARA)
-Identifies tracts with low access to grocery stores, often used to define food deserts. Includes tract population counts and demographic data. Data reflects 2010 census tract information.
+
+- Dataset 1: CDC PLACES Census Tract Data (2020–2024 releases)- Provides modeled estimates of chronic disease prevalence at the census tract level. Datasets reflect Behavioral Risk Factor Surveillance System (BRFSS) data from two years prior. The 2020-2024 released datasets cover the years 2018-2020, respectively.
+- Dataset 2: USDA Food Access Research Atlas (FARA)- Identifies tracts with low access to grocery stores, often used to define food deserts. Includes tract population counts and demographic data. Data reflects 2010 census tract information.
 
 | Dataset | Key Variables | Purpose | Source |
 |---|---|---|---|
@@ -79,25 +78,21 @@ Through our thorough exploratory data analysis, various regressions, and plottin
 - Question 1: How does the intersection of food access, poverty, and geography contribute to the burden of chronic disease in Arizona? We found that intersection of food access, poverty, and place is strongly associated with chronic disease burden. Tracts scoring higher on food-desert indicators (distance to stores, low income + low access, limited vehicle access) show substantially higher obesity and diabetes.
 - Question 2: How does this vary between rural Native Nations and Urban areas? Our analysis concluded that the burden is higher and grows faster in rural Native Nations than in urban areas of Arizona. Even looking at the trends over time, Native American/Alaskan Native communities start higher and stay higher, and the Food Desert Score gradient is strongest for these panels as well.
 
-Diabetes
 ![](images/diabetes_top10.png)
 
 Figure 1: Diabetes Prevalence Rates, Top-10 AZ counties by Race 
 Across 2018–2022, diabetes prevalence rose in nearly every county and race, with Native American & Alaska Native (AIAN) consistently the highest. The gap is most visible in counties with large tribal land (e.g., Apache, Navajo). Other groups trend upward too, but from lower baselines.
 
-Obesity
 ![](images/obesity_top10.png)
 
 Figure 2: Obesity Prevalence Rates, Top-10 AZ counties by Race
 Obesity rises statewide across years, again with AIAN highest in most counties and visible growth in counties overlapping tribal lands. In more urban counties the levels are lower, though trends remain upward.
 
-Diabetes
 ![](images/fds_dia.png)
 
 Figure 3: Diabetes Rates by Food Desert Score (FDS), by Race 
 Within each race, the High FDS (blue) line sits above Medium/Low and often diverges by 2022, especially for AIAN, where the increase is steepest. This shows a clear trend: more severe food-desert conditions leads to higher diabetes prevalence.
 
-Obesity
 ![](images/fds_ob.png)
 
 Figure 4: Obesity by Food Desert Score (FDS), by Race 
@@ -110,6 +105,8 @@ To quickly surface “hot spots,” we standardized each tract’s obesity & dia
 Finally, regression models showed that poverty, food access, and healthcare access are strong predictors of obesity and diabetes, which supports the focus of our risk modeling. We ran Type III tests with Race and Year as key variables:
 - ANOVA (Year as categorical): For both obesity and diabetes, race is significant (p < 1e-12), and year is significant (p ≲ 1e-5 to 1e-21). The Race x Year interaction is not—so the ordering of groups is stable over time. Partial η² for Race is ~0.12–0.14 (moderate); for Year it’s ~0.06 (obesity) and ~0.19 (diabetes), implying stronger time growth on diabetes.
 - ANCOVA (Year as continuous, centered): We found a similar trend here, race and year are both significant; Race x Year is tiny and non-significant. Effect sizes are similar (Race η²ₚ ≈ 0.12, Year η²ₚ ≈ 0.05–0.09).
+
+![](images/updated_2x2_anova_reg.png)
 
 After adjusting for time, race differences remain, with the Native American/Alaskan Native (AIAN) population being the highest; and prevalence is increasing over time, more clearly for diabetes. Using AIAN as the baseline, coefficients for other races are negative at every quantile for both outcomes. The gaps are smallest at the 25th percentile and largest at the 75th (e.g., for obesity at q=0.75, other groups are ~2–5 percentage points lower than AIAN). That tells us disparities aren’t only at the mean, but that they widen in higher-burden tracts.
 
