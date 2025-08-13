@@ -8,10 +8,10 @@ format: html
 
 ![](images/updated 2x2 anova reg.png)
 
-## Quantile Regression for Diabetes Prevelance Rates 
+## Quantile Regression for Diabetes Prevalance Rates 
 
 ![](images/dia_quant_reg.png)
 
-## Quantile Regression for Obesity Prevelance Rates 
+## Quantile Regression for Obesity Prevalance Rates 
 
 ![](images/ob_quant_reg.png)
