@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Remi Hendershott, Sarah Gilbride, &amp; Cole Johnson">
-<meta name="description" content="GeoHealthAI is a data science initiative aimed at identifying and visualizing food deserts and chronic disease risk zones across Arizona, with a focus on Native Nations. By combining tract-level public health data, USDA food access metrics, and spatial socioeconomic indicators, the project seeks to explore the relationship between food accessibility, poverty, and chronic health outcomes such as obesity and diabetes.">
+<meta name="description" content="GeoHealthAI analyzes and visualizes food access and chronic disease risk in Arizona, focusing on disparities in rural areas such as the Native Nations, to understand how food accessibility and poverty connect to diabetes &amp; obesity disease rates.">
 
 <title>GeoHealthAI</title>
 <style>
@@ -4033,6 +4033,22 @@ vertical-align: -.125em;
     <a class="nav-link" href="./about.html"> 
 <span class="menu-text">About</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./code.html"> 
+<span class="menu-text">Code</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./dashboard.html"> 
+<span class="menu-text">Heatmap Dashboard</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./EDADashboard.html"> 
+<span class="menu-text">EDA Dashboard</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./RegressionDashboard.html"> 
+<span class="menu-text">Regression Dashboard</span></a>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -4052,8 +4068,29 @@ vertical-align: -.125em;
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-        
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#abstract" id="toc-abstract" class="nav-link active" data-scroll-target="#abstract">Abstract</a></li>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link" data-scroll-target="#introduction">Introduction</a>
+  <ul class="collapse">
+  <li><a href="#questions" id="toc-questions" class="nav-link" data-scroll-target="#questions">Questions</a></li>
+  <li><a href="#data-journalism" id="toc-data-journalism" class="nav-link" data-scroll-target="#data-journalism">Data Journalism</a></li>
+  </ul></li>
+  <li><a href="#data-analysis-methodology" id="toc-data-analysis-methodology" class="nav-link" data-scroll-target="#data-analysis-methodology">Data Analysis &amp; Methodology</a>
+  <ul class="collapse">
+  <li><a href="#data" id="toc-data" class="nav-link" data-scroll-target="#data">Data</a></li>
+  <li><a href="#cleaning-and-processing" id="toc-cleaning-and-processing" class="nav-link" data-scroll-target="#cleaning-and-processing">Cleaning and Processing</a></li>
+  </ul></li>
+  <li><a href="#literature-review" id="toc-literature-review" class="nav-link" data-scroll-target="#literature-review">Literature Review</a></li>
+  <li><a href="#results" id="toc-results" class="nav-link" data-scroll-target="#results">Results</a></li>
+  <li><a href="#discussion" id="toc-discussion" class="nav-link" data-scroll-target="#discussion">Discussion</a></li>
+  <li><a href="#limitations-future-work" id="toc-limitations-future-work" class="nav-link" data-scroll-target="#limitations-future-work">Limitations &amp; Future Work</a></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">References</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -4067,7 +4104,7 @@ vertical-align: -.125em;
 
 <div>
   <div class="description">
-    GeoHealthAI is a data science initiative aimed at identifying and visualizing food deserts and chronic disease risk zones across Arizona, with a focus on Native Nations. By combining tract-level public health data, USDA food access metrics, and spatial socioeconomic indicators, the project seeks to explore the relationship between food accessibility, poverty, and chronic health outcomes such as obesity and diabetes.
+    GeoHealthAI analyzes and visualizes food access and chronic disease risk in Arizona, focusing on disparities in rural areas such as the Native Nations, to understand how food accessibility and poverty connect to diabetes &amp; obesity disease rates.
   </div>
 </div>
 
@@ -4097,10 +4134,97 @@ vertical-align: -.125em;
 </header>
 
 
+<section id="abstract" class="level2">
+<h2 class="anchored" data-anchor-id="abstract">Abstract</h2>
+<p>GeoHealthAI quantifies and maps the overlap of food access, poverty, and chronic disease in Arizona—with particular attention to Native Nations—using tract-level data from CDC PLACES, the USDA Food Access Research Atlas, and socioeconomic indicators. Using PySpark and Pandas, we integrate sources by tract FIPS and conduct descriptive analyses, correlation matrices, linear regressions, and z-score flagging to identify high-burden tracts. We deploy an interactive dashboard, including a heatmap and supplemental visuals to surface priority areas. Beyond data analysis, we aim to pair the analytics with interviews that center Native perspectives, providing culturally grounded context for community-informed public health action.</p>
+</section>
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>GeoHealthAI is a data science initiative aimed at identifying and visualizing food deserts and chronic disease risk zones across Arizona, with a focus on Native Nations. By combining tract-level public health data, USDA food access metrics, and spatial socioeconomic indicators, the project seeks to explore the relationship between food accessibility, poverty, and chronic health outcomes such as obesity and diabetes. We used PySpark for the data wrangling and processing, accompanied with Python’s Pandas to generate visualizations and perform analysis. Our goal is not only to explore statistical correlations, but to generate an interactive heatmap dashboard and identify high-risk areas for targeted public health interventions.</p>
+<section id="questions" class="level3">
+<h3 class="anchored" data-anchor-id="questions">Questions</h3>
+<section id="question-1-how-does-the-intersection-of-food-access-poverty-and-geography-contribute-to-the-burden-of-chronic-disease-in-arizona" class="level4">
+<h4 class="anchored" data-anchor-id="question-1-how-does-the-intersection-of-food-access-poverty-and-geography-contribute-to-the-burden-of-chronic-disease-in-arizona">Question 1: How does the intersection of food access, poverty, and geography contribute to the burden of chronic disease in Arizona?</h4>
+</section>
+<section id="question-2-how-does-this-vary-between-rural-native-nations-and-urban-areas" class="level4">
+<h4 class="anchored" data-anchor-id="question-2-how-does-this-vary-between-rural-native-nations-and-urban-areas">Question 2: How does this vary between rural Native Nations and Urban areas?</h4>
+</section>
+</section>
+<section id="data-journalism" class="level3">
+<h3 class="anchored" data-anchor-id="data-journalism">Data Journalism</h3>
+<p>In addition to quantitative analysis, we are pursuing a data journalism approach to center Native voices and cultural context. We are conducting interviews with community members and cultural experts, including the owner of the Toadlena Trading Post and locals who reside on the Tohono O’odham Nation land, to understand barriers to healthcare access and traditional food systems. These narratives will help us interpret our findings through the lens of Indigenous experience — including questions about trust in Western medicine, infrastructure gaps, and tribal-led health solutions. The journalism piece will serve as a vital human-centered supplement to our statistical insights, bridging data and lived experience.</p>
+</section>
+</section>
+<section id="data-analysis-methodology" class="level2">
+<h2 class="anchored" data-anchor-id="data-analysis-methodology">Data Analysis &amp; Methodology</h2>
+<section id="data" class="level3">
+<h3 class="anchored" data-anchor-id="data">Data</h3>
+<p>We use two main datasets in this project: #### Dataset 1: CDC PLACES Census Tract Data (2020–2024 releases) Provides modeled estimates of chronic disease prevalence at the census tract level. Datasets reflect Behavioral Risk Factor Surveillance System (BRFSS) data from two years prior. The 2020-2024 released datasets cover the years 2018-2020, respectively. #### Dataset 2: USDA Food Access Research Atlas (FARA) Identifies tracts with low access to grocery stores, often used to define food deserts. Includes tract population counts and demographic data. Data reflects 2010 census tract information.</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Dataset</th>
+<th>Key Variables</th>
+<th>Purpose</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>CDC PLACES (Census Tract)</strong> — releases 2020–2024 <em>(BRFSS ~2018–2022)</em></td>
+<td>OBESITY_CrudePrev, DIABETES_CrudePrev, CANCER_CrudePrev; TractFIPS, CountyName</td>
+<td>Provide tract-level health outcomes for correlation/regression with food access &amp; poverty; flag high-burden tracts (z-scores); enable multi-year trends.</td>
+<td><a href="https://data.cdc.gov/500-Cities-Places/PLACES-Census-Tract-Data-GIS-Friendly-Format-2020-/ib3w-k9rq/about_data" class="uri">https://data.cdc.gov/500-Cities-Places/PLACES-Census-Tract-Data-GIS-Friendly-Format-2020-/ib3w-k9rq/about_data</a></td>
+</tr>
+<tr class="even">
+<td><strong>USDA Food Access Research Atlas (FARA)</strong></td>
+<td>LILATracts_1And10, LILATracts_halfAnd10, LILATracts_Vehicle, LATracts1/10/20; PovertyRate, LowIncomeTracts, MedianFamilyIncome; tract population by race; TractFIPS, CountyName</td>
+<td>Operationalize food-desert severity and socioeconomic context; supply demographics for disparity analysis; provide join keys to align with PLACES.</td>
+<td><a href="https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data" class="uri">https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data</a></td>
+</tr>
+</tbody>
+</table>
+<p>These publicly available datasets collectively cover 1,516–1,520 census tracts across Arizona, including rural, metro, and tribal lands.These datasets reflect data from 2018-2022, effectively capturing pre-pandemic, pandemic, and post-pandemic health and disease prevalence within Arizona communities. This series of data allows for the added element of time as an analysis option when exploring the relationship between food accessibility and chronic health outcomes within these tracts.</p>
+</section>
+<section id="cleaning-and-processing" class="level3">
+<h3 class="anchored" data-anchor-id="cleaning-and-processing">Cleaning and Processing</h3>
+<p>Given the spatial and demographic complexity of our data, we chose a combination of PySpark and Pandas for scalable processing and exploratory data analysis. We employ:</p>
+<ul>
+<li>Descriptive analysis (.describe, null checks, distribution plots)</li>
+<li>Correlation matrices (to assess relationships between variables)</li>
+<li>Regression modeling (linear models to predict disease rates based on food access and income)</li>
+<li>Z-score flagging (to identify outliers and high-burden tracts)</li>
+</ul>
+<p>This multi-pronged approach allows us to identify both global trends (e.g., statewide patterns in obesity) and local outliers (e.g., specific tribal tracts with extreme health burdens).</p>
+<p>We first brought the CDC PLACES and USDA FARA tables onto the same footing by joining on census-tract FIPS; four records didn’t match across sources and were dropped. Within each dataset we tidied and harmonized fields: for CDC PLACES (2020–2024 releases) we verified tract IDs, aligned variable names across years, and removed rows with missing values; for the USDA atlas we clarified flag names and built a composite Food Desert Score by summing the key access indicators. Using tract population by race, we also generated race-specific health counts to support disparity analyses. After merging, we standardized variables and flagged tracts that were more than 2 SD above the statewide mean for obesity, diabetes, or food-desert burden. Finally, regression models showed that poverty, food access, and healthcare access are strong predictors of obesity and diabetes, which supports the focus of our risk modeling.</p>
+</section>
+</section>
+<section id="literature-review" class="level2">
+<h2 class="anchored" data-anchor-id="literature-review">Literature Review</h2>
+<p>Research shows that food deserts are strongly linked to poor health outcomes such as obesity and diabetes, especially in rural and Native communities (Sallis et al., 2020). Navajo Nation and other tribal lands often face compounded barriers: vast distances to grocery stores, lack of transportation, and limited healthcare access (Hossain et al., 2021; Burnette et al., 2020). Prior studies have used survey data or point-based facility mapping, but recent work emphasizes the need for multi-scale geospatial modeling that combines satellite imagery with community-level health and infrastructure data.</p>
+<p>For example, Hossain et al. (2021) used remote sensing to map food deserts in tribal lands but did not integrate health outcomes. Burnette et al. (2020) conducted qualitative studies highlighting social determinants in Native communities but lacked spatial predictions. Kelli et al. (2019) identified the impact that low area income within a food desert appears to have on cardiovascular health, but did not isolate Native localities. Sallis et al. (2020) called for advanced spatial methods to visualize disparities more precisely.</p>
+<p>GeoHealthAI advances this work with an integrated, tract-level approach that fuses CDC PLACES health estimates with USDA food-access metrics to reveal where risks cluster. Our contribution is a clear, interactive heat-map that lets users explore patterns across race, poverty, and access—so tribal policymakers, public health planners, and researchers can quickly pinpoint priority areas for food and health interventions.</p>
+</section>
+<section id="results" class="level2">
+<h2 class="anchored" data-anchor-id="results">Results</h2>
+</section>
+<section id="discussion" class="level2">
+<h2 class="anchored" data-anchor-id="discussion">Discussion</h2>
+</section>
+<section id="limitations-future-work" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-future-work">Limitations &amp; Future Work</h2>
+<p>One key limitation of our analysis lies in the accuracy and completeness of demographic data—particularly for tribal lands. The available data on tracts containing Native American tribal nations likely underrepresents the true population and health dynamics of these communities due to historical undercounting, outdated boundaries, or incomplete reporting. This makes it difficult to draw fully representative conclusions about health disparities in these areas.</p>
+<p>Additionally, our population data for Arizona tracts is sourced from 2021 food access research atlas data that uses the 2010 Census, which is now significantly outdated. Given the rapid growth and shifting demographics in many parts of the state, especially urban and suburban regions, this outdated baseline introduces uncertainty into our calculated prevalence rates and comparisons across counties and racial groups.</p>
+<p>Data for calculated prevalence across racial groups was used based on simulated data using the quantity of people of a given race in a tract, multiplied by the overall prevalence rate within that specific tract. If different racial groups have different prevalence rates within a tract, the actual data might be slightly different than our simulated data.</p>
+<p>For future work, access to more current population estimates—such as from the 2020 Census or intercensal updates—would enhance the reliability of our analyses. With updated population data, we could refine prevalence rate calculations, improve normalization across counties and racial categories, and make stronger, more actionable conclusions. Moreover, incorporating additional data sources specific to tribal nations or partnering with tribal epidemiology centers could provide a more accurate and nuanced view of Native health outcomes and the structural factors driving disparities.</p>
+</section>
+<section id="references" class="level2">
+<h2 class="anchored" data-anchor-id="references">References</h2>
 
 
 <!-- -->
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
@@ -4239,7 +4363,7 @@ vertical-align: -.125em;
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp('/' + window.location.host + '/');
+        var filterRegex = new RegExp("https:\/\/INFO-698-InfoSci-Capstone\.github\.io\/geo-health-ai\/");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -4573,7 +4697,7 @@ vertical-align: -.125em;
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">  - name: &quot;Remi Hendershott, Sarah Gilbride, &amp; Cole Johnson&quot;</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">    affiliations:</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="co">      - name: &quot;School of Information, University of Arizona&quot;</span></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> &quot;GeoHealthAI is a data science initiative aimed at identifying and visualizing food deserts and chronic disease risk zones across Arizona, with a focus on Native Nations. By combining tract-level public health data, USDA food access metrics, and spatial socioeconomic indicators, the project seeks to explore the relationship between food accessibility, poverty, and chronic health outcomes such as obesity and diabetes.&quot;</span></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="an">description:</span><span class="co"> &quot;GeoHealthAI analyzes and visualizes food access and chronic disease risk in Arizona, focusing on disparities in rural areas such as the Native Nations, to understand how food accessibility and poverty connect to diabetes &amp; obesity disease rates.&quot;</span></span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="an">format:</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="co">   html:</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
@@ -4583,7 +4707,78 @@ vertical-align: -.125em;
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co">  echo: false</span></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">## Abstract</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>GeoHealthAI quantifies and maps the overlap of food access, poverty, and chronic disease in Arizona—with particular attention to Native Nations—using tract-level data from CDC PLACES, the USDA Food Access Research Atlas, and socioeconomic indicators. Using PySpark and Pandas, we integrate sources by tract FIPS and conduct descriptive analyses, correlation matrices, linear regressions, and z-score flagging to identify high-burden tracts. We deploy an interactive dashboard, including a heatmap and supplemental visuals to surface priority areas. Beyond data analysis, we aim to pair the analytics with interviews that center Native perspectives, providing culturally grounded context for community-informed public health action.</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a><span class="fu">## Introduction</span></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>GeoHealthAI is a data science initiative aimed at identifying and visualizing food deserts and chronic disease risk zones across Arizona, with a focus on Native Nations. By combining tract-level public health data, USDA food access metrics, and spatial socioeconomic indicators, the project seeks to explore the relationship between food accessibility, poverty, and chronic health outcomes such as obesity and diabetes. We used PySpark for the data wrangling and processing, accompanied with Python’s Pandas to generate visualizations and perform analysis. Our goal is not only to explore statistical correlations, but to generate an interactive heatmap dashboard and identify high-risk areas for targeted public health interventions.</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### Questions</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Question 1: How does the intersection of food access, poverty, and geography contribute to the burden of chronic disease in Arizona?</span></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Question 2: How does this vary between rural Native Nations and Urban areas?</span></span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">### Data Journalism </span></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>In addition to quantitative analysis, we are pursuing a data journalism approach to center Native voices and cultural context. We are conducting interviews with community members and cultural experts, including the owner of the Toadlena Trading Post and locals who reside on the Tohono O’odham Nation land, to understand barriers to healthcare access and traditional food systems. These narratives will help us interpret our findings through the lens of Indigenous experience — including questions about trust in Western medicine, infrastructure gaps, and tribal-led health solutions. The journalism piece will serve as a vital human-centered supplement to our statistical insights, bridging data and lived experience.</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data Analysis &amp; Methodology </span></span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">### Data </span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>We use two main datasets in this project:</span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Dataset 1: CDC PLACES Census Tract Data (2020–2024 releases)</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>Provides modeled estimates of chronic disease prevalence at the census tract level. Datasets reflect Behavioral Risk Factor Surveillance System (BRFSS) data from two years prior. The 2020-2024 released datasets cover the years 2018-2020, respectively.</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Dataset 2: USDA Food Access Research Atlas (FARA)</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>Identifies tracts with low access to grocery stores, often used to define food deserts. Includes tract population counts and demographic data. Data reflects 2010 census tract information.</span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Dataset <span class="pp">|</span> Key Variables <span class="pp">|</span> Purpose <span class="pp">|</span> Source <span class="pp">|</span></span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|---|</span></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **CDC PLACES (Census Tract)** — releases 2020–2024 *(BRFSS ~2018–2022)* <span class="pp">|</span> OBESITY_CrudePrev, DIABETES_CrudePrev, CANCER_CrudePrev; TractFIPS, CountyName <span class="pp">|</span> Provide tract-level health outcomes for correlation/regression with food access &amp; poverty; flag high-burden tracts (z-scores); enable multi-year trends. <span class="pp">|</span> <span class="ot">&lt;https://data.cdc.gov/500-Cities-Places/PLACES-Census-Tract-Data-GIS-Friendly-Format-2020-/ib3w-k9rq/about_data&gt;</span> <span class="pp">|</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **USDA Food Access Research Atlas (FARA)** <span class="pp">|</span> LILATracts_1And10, LILATracts_halfAnd10, LILATracts_Vehicle, LATracts1/10/20; PovertyRate, LowIncomeTracts, MedianFamilyIncome; tract population by race; TractFIPS, CountyName <span class="pp">|</span> Operationalize food-desert severity and socioeconomic context; supply demographics for disparity analysis; provide join keys to align with PLACES. <span class="pp">|</span> <span class="ot">&lt;https://www.ers.usda.gov/data-products/food-access-research-atlas/download-the-data&gt;</span> <span class="pp">|</span></span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>These publicly available datasets collectively cover 1,516–1,520 census tracts across Arizona, including rural, metro, and tribal lands.These datasets reflect data from 2018-2022, effectively capturing pre-pandemic, pandemic, and post-pandemic health and disease prevalence within Arizona communities. This series of data allows for the added element of time as an analysis option when exploring the relationship between food accessibility and chronic health outcomes within these tracts. </span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="fu">### Cleaning and Processing </span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>Given the spatial and demographic complexity of our data, we chose a combination of PySpark and Pandas for scalable processing and exploratory data analysis. We employ:</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Descriptive analysis (.describe, null checks, distribution plots)</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Correlation matrices (to assess relationships between variables)</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Regression modeling (linear models to predict disease rates based on food access and income)</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Z-score flagging (to identify outliers and high-burden tracts)</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>This multi-pronged approach allows us to identify both global trends (e.g., statewide patterns in obesity) and local outliers (e.g., specific tribal tracts with extreme health burdens).</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>We first brought the CDC PLACES and USDA FARA tables onto the same footing by joining on census-tract FIPS; four records didn’t match across sources and were dropped. Within each dataset we tidied and harmonized fields: for CDC PLACES (2020–2024 releases) we verified tract IDs, aligned variable names across years, and removed rows with missing values; for the USDA atlas we clarified flag names and built a composite Food Desert Score by summing the key access indicators. Using tract population by race, we also generated race-specific health counts to support disparity analyses. After merging, we standardized variables and flagged tracts that were more than 2 SD above the statewide mean for obesity, diabetes, or food-desert burden. Finally, regression models showed that poverty, food access, and healthcare access are strong predictors of obesity and diabetes, which supports the focus of our risk modeling.</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a><span class="fu">## Literature Review </span></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>Research shows that food deserts are strongly linked to poor health outcomes such as obesity and diabetes, especially in rural and Native communities (Sallis et al., 2020). Navajo Nation and other tribal lands often face compounded barriers: vast distances to grocery stores, lack of transportation, and limited healthcare access (Hossain et al., 2021; Burnette et al., 2020). Prior studies have used survey data or point-based facility mapping, but recent work emphasizes the need for multi-scale geospatial modeling that combines satellite imagery with community-level health and infrastructure data.</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>For example, Hossain et al. (2021) used remote sensing to map food deserts in tribal lands but did not integrate health outcomes. Burnette et al. (2020) conducted qualitative studies highlighting social determinants in Native communities but lacked spatial predictions. Kelli et al. (2019) identified the impact that low area income within a food desert appears to have on cardiovascular health, but did not isolate Native localities. Sallis et al. (2020) called for advanced spatial methods to visualize disparities more precisely.</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>GeoHealthAI advances this work with an integrated, tract-level approach that fuses CDC PLACES health estimates with USDA food-access metrics to reveal where risks cluster. Our contribution is a clear, interactive heat-map that lets users explore patterns across race, poverty, and access—so tribal policymakers, public health planners, and researchers can quickly pinpoint priority areas for food and health interventions.</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a><span class="fu">## Results </span></span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a><span class="fu">## Discussion </span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limitations &amp; Future Work </span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>One key limitation of our analysis lies in the accuracy and completeness of demographic data—particularly for tribal lands. The available data on tracts containing Native American tribal nations likely underrepresents the true population and health dynamics of these communities due to historical undercounting, outdated boundaries, or incomplete reporting. This makes it difficult to draw fully representative conclusions about health disparities in these areas. </span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>Additionally, our population data for Arizona tracts is sourced from 2021 food access research atlas data that uses the 2010 Census, which is now significantly outdated. Given the rapid growth and shifting demographics in many parts of the state, especially urban and suburban regions, this outdated baseline introduces uncertainty into our calculated prevalence rates and comparisons across counties and racial groups.</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>Data for calculated prevalence across racial groups was used based on simulated data using the quantity of people of a given race in a tract, multiplied by the overall prevalence rate within that specific tract. If different racial groups have different prevalence rates within a tract, the actual data might be slightly different than our simulated data.</span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>For future work, access to more current population estimates—such as from the 2020 Census or intercensal updates—would enhance the reliability of our analyses. With updated population data, we could refine prevalence rate calculations, improve normalization across counties and racial categories, and make stronger, more actionable conclusions. Moreover, incorporating additional data sources specific to tribal nations or partnering with tribal epidemiology centers could provide a more accurate and nuanced view of Native health outcomes and the structural factors driving disparities.</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="fu">## References </span></span></code><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></pre></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 
