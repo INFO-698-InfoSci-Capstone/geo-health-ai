@@ -43,6 +43,8 @@ PCTDG['CANCER_CrudePrev'].corr(PCTDG['TotalPopulation'])
 PCTDG = PCTDG.rename(columns = {'TRACT': 'CensusTract'})
 
 Merged =  pd.merge(AZ_FARA, PCTDG, on='CensusTract', how = 'left')
+
+
 Merged_Without_Strings = Merged.drop(columns = ['TEETHLOST_Crude95CI','Geolocation','State','County','StateAbbr','StateDesc','CountyName'])
 cols_to_drop = Merged_Without_Strings.columns[Merged_Without_Strings.columns.str.contains('95CI')]
 Merged_Without_Strings.drop(cols_to_drop, axis = 1, inplace = True)
