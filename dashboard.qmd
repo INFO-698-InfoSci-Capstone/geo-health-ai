@@ -1,23 +1,27 @@
 ---
 title: "GeoHealthAI"
-subtitle: "Dashboard"
+subtitle: "HeatMap Dashboard"
 format: dashboard
 ---
 
-## Row {height=50%}
-
+## Row {.tabset}
 ```{python}
-%run Diabetes_Dashboard_Python.py
-```
-```{python}
-%run Diabetes_Dashboard_Python.py
-```
-
-## Row {height=50%}
-
-```{python}
+#| title: Obesity Heatmap
 %run Obesity_Dashboard_Python.py
 ```
+
 ```{python}
+#| title: Diabetes Heatmap
+%run Diabetes_Dashboard_Python.py
+```
+
+## Row {.tabset}
+```{python}
+#| title: Obesity Heatmap
 %run Obesity_Dashboard_Python.py
+```
+
+```{python}
+#| title: Diabetes Heatmap
+%run Diabetes_Dashboard_Python.py
 ```

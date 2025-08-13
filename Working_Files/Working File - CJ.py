@@ -8,6 +8,7 @@ from urllib.request import urlopen
 import plotly.graph_objects as go
 import urllib.request
 import plotly.express as px
+from matplotlib.ticker import PercentFormatter
 
 FARA = pd.read_csv('../data/FARA.csv')
 AZ_FARA = FARA[FARA['State'] == 'Arizona']
@@ -71,6 +72,7 @@ ax8 = Merged.plot.scatter(x = 'TEETHLOST_CrudePrev', y = 'DIABETES_CrudePrev')
 ax8.set_title("Number of Teeth Lost vs. Diabetes prevalence")
 ax8.set_xlabel("Number of Teeth Lost")
 ax8.set_ylabel("Diabetes Prevalence")
+ax8.yaxis.set_major_formatter(PercentFormatter(100))
 plt.show()
 ax9 = Merged.plot.scatter(x = 'TEETHLOST_CrudePrev', y = 'OBESITY_CrudePrev')
 ax9.set_title("Number of Teeth Lost vs. Obesity prevalence")
@@ -81,11 +83,15 @@ ax12 = Merged.plot.scatter(x = 'ACCESS2_CrudePrev', y = 'DIABETES_CrudePrev', co
 ax12.set_title("Lack Of Access to Healthcare vs. Diabetes Prevalence")
 ax12.set_xlabel("Lack of Access to Healthcare")
 ax12.set_ylabel("Diabetes Prevalence")
+ax12.yaxis.set_major_formatter(PercentFormatter(100))
+ax12.xaxis.set_major_formatter(PercentFormatter(100))
 plt.show()
 ax13 = Merged.plot.scatter(x = 'ACCESS2_CrudePrev', y = 'OBESITY_CrudePrev', color = 'blue')
 ax13.set_title("Lack Of Access to Healthcare vs. Obesity Prevalence")
 ax13.set_xlabel("Lack of Access to Healthcare")
 ax13.set_ylabel("Obesity Prevalence")
+ax13.yaxis.set_major_formatter(PercentFormatter(100))
+ax13.xaxis.set_major_formatter(PercentFormatter(100))
 plt.show()
 #ax14 = Merged.plot.scatter(x = 'DENTAL_CrudePrev', y = 'DIABETES_CrudePrev')
 #ax14.set_title("Prevalence of Recent Dental Visits vs. Diabetes Prevalence")
@@ -103,11 +109,13 @@ ax18 = Merged.plot.scatter(x = 'MedianFamilyIncome', y = 'DIABETES_CrudePrev', c
 ax18.set_title("Median Family Income vs. Diabetes Prevalence")
 ax18.set_xlabel("Median Family Income")
 ax18.set_ylabel("Obesity Prevalence")
+ax18.yaxis.set_major_formatter(PercentFormatter(100))
 plt.show()
 ax19 = Merged.plot.scatter(x = 'MedianFamilyIncome', y = 'OBESITY_CrudePrev', color = 'purple')
 ax19.set_title("Median Family Income vs. Obesity Prevalence")
 ax19.set_xlabel("Median Family Income")
 ax19.set_ylabel("Obesity Prevalence")
+ax19.yaxis.set_major_formatter(PercentFormatter(100))
 plt.show()
 ### New Time Based Analysis
 

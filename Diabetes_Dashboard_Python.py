@@ -24,13 +24,15 @@ with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-c
 mycustomdata = np.stack((Unioned_Data_FIPS['CountyName'],Unioned_Data_FIPS['%WhiteDiabetes'],Unioned_Data_FIPS['%BlackDiabetes']))
 
 fig2 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
-                    locations = 'FIPS_Code', color = '%WhiteDiabetes',
+                    locations = 'FIPS_Code', color='%WhiteDiabetes',
                     color_continuous_scale = "Viridis",scope = "usa",
                     animation_frame = 'year',
-                    title = 'Arizona County Heatmap for Diabetes Rates',
-                    labels = {'%WhiteDiabetes':'Diabetes Percent'},
+                    title = 'Arizona County Heatmap for Diabetes Rates<br><sub>Select a racial group from the dropdown</sub>',
+                    labels = {'%WhiteDiabetes':'Diabetes<br>Percent'},
                     range_color = [10,25],
-                    hover_data = ["CountyName"])
+                    hover_data = ["CountyName"],
+                    width = 900,
+                    height = 350)
 
 fig2.update_geos(center = {"lat": 34.0489,"lon": -111.0937},
                  projection_scale = 4,
@@ -48,16 +50,24 @@ fig2.update_layout(
     updatemenus=[
         dict(
             active=0,
-            buttons=[box1,box2,box3,box4,box5,box6],
-            type = "dropdown",
+            buttons=[box1, box2, box3, box4, box5, box6],
+            type="dropdown",
             direction="down",
-            showactive=False,
-            x=0.001,
+            showactive=True,
+            x=0.001, 
             xanchor="left",
-            y=1.2,
-            yanchor="top"
+            y=1,
+            yanchor="top",
+            bgcolor="white",
+            bordercolor="black",
+            borderwidth=1,
+            font=dict(size=12),
+            pad={"r": 10, "t": 10},
         )
-    ]
+    ],
+    coloraxis_colorbar=dict(
+        title='Obesity Percent'
+    )
 )
 
 fig2.show()

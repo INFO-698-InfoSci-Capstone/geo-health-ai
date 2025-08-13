@@ -1,23 +1,35 @@
 ---
 title: "GeoHealthAI"
 subtitle: "EDA Dashboard"
-format: dashboard
+format: html
 ---
+## Obesity and Diabetes Rates over time by race
+Obesity
+![](images/obesity_top10.png)
+Diabetes
+![](images/diabetes_top10.png)
 
-## Row {height=50%}
+## Obesity and Diabetes Rates by food desert score
+### Food Desert Score Takes into account food access, income and other factors that could influence food availability.
+Obesity
+![](images/fds_ob.png)
+Diabetes
+![](images/fds_dia.png)
 
-```{python}
+## Lack of Access to Healthcare vs. Obesity and Diabetes Rates By Tract
+Obesity
+<br>
+![](images/Lack Of Access to Healthcare vs. Obesity Prevalence.png)
+<br>
+Diabetes
+<br>
+![](images/Lack Of Access to Healthcare vs. Diabetes Prevalence.png)
 
-```
-```{python}
-
-```
-
-## Row {height=50%}
-
-```{python}
-
-```
-```{python}
-
-```
+## Median Family Income vs. Obesity and Diabetes Rates by Tract
+Obesity
+<br>
+![](images/Median Family Income vs. Obesity Prevalence.png)
+<br>
+Diabetes
+<br>
+![](images/Median Family Income vs. Diabetes Prevalence.png)
