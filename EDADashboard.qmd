@@ -1,24 +1,23 @@
 ---
 title: "GeoHealthAI"
-subtitle: "Dashboard"
+subtitle: "EDA Dashboard"
 format: dashboard
 ---
 
 ## Row {height=50%}
 
 ```{python}
-cd C:\Users\colej\Documents\Data Science Capstone\geo-health-ai-1
-%run Diabetes_Dashboard_Python.py
+
 ```
 ```{python}
-%run Diabetes_Dashboard_Python.py
+
 ```
 
 ## Row {height=50%}
 
 ```{python}
-%run Obesity_Dashboard_Python.py
+
 ```
 ```{python}
-%run Obesity_Dashboard_Python.py
+
 ```

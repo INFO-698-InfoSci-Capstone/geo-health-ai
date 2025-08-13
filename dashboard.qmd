@@ -7,7 +7,6 @@ format: dashboard
 ## Row {height=50%}
 
 ```{python}
-cd C:\Users\colej\Documents\Data Science Capstone\geo-health-ai-1
 %run Diabetes_Dashboard_Python.py
 ```
 ```{python}
