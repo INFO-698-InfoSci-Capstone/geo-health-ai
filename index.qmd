@@ -106,7 +106,7 @@ Finally, regression models showed that poverty, food access, and healthcare acce
 - ANOVA (Year as categorical): For both obesity and diabetes, race is significant (p < 1e-12), and year is significant (p ≲ 1e-5 to 1e-21). The Race x Year interaction is not—so the ordering of groups is stable over time. Partial η² for Race is ~0.12–0.14 (moderate); for Year it’s ~0.06 (obesity) and ~0.19 (diabetes), implying stronger time growth on diabetes.
 - ANCOVA (Year as continuous, centered): We found a similar trend here, race and year are both significant; Race x Year is tiny and non-significant. Effect sizes are similar (Race η²ₚ ≈ 0.12, Year η²ₚ ≈ 0.05–0.09).
 
-![](images/updated_2x2_anova_reg.png)
+![](images/updated 2x2 anova reg.png)
 
 After adjusting for time, race differences remain, with the Native American/Alaskan Native (AIAN) population being the highest; and prevalence is increasing over time, more clearly for diabetes. Using AIAN as the baseline, coefficients for other races are negative at every quantile for both outcomes. The gaps are smallest at the 25th percentile and largest at the 75th (e.g., for obesity at q=0.75, other groups are ~2–5 percentage points lower than AIAN). That tells us disparities aren’t only at the mean, but that they widen in higher-burden tracts.
 

@@ -6,7 +6,7 @@ format: html
 
 ## Type III ANOVA/ANCOVA Regressions for Obesity & Diabetes 
 
-![](images/updated_2x2_anova_reg.png)
+![](images/updated 2x2 anova reg.png)
 
 ## Quantile Regression for Diabetes Prevelance Rates 
 
