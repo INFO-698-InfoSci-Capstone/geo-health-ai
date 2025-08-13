@@ -1,6 +1,6 @@
 ---
 title: "GeoHealthAI"
-subtitle: "EDA Dashboard"
+subtitle: "EDA Infographics"
 format: html
 ---
 ## Obesity and Diabetes Rates over time by race
