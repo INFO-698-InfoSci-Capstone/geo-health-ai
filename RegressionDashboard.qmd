@@ -1,6 +1,6 @@
 ---
 title: "GeoHealthAI"
-subtitle: "Regression Dashboard"
+subtitle: "Regressions"
 format: dashboard
 ---
 

@@ -42,9 +42,9 @@ Folders & Files
 - `Working_Files`: Contains individual working files for each team mate; used for cleaning data & making visuals.
 - `data`: Includes all datasets used for analysis.
 - `index.qmd`: Holds the final project report with infographics included. 
-- `dashboard.qmd`: Visualizations like our interactive heatmap are displayed here and sorted by tabs. 
-- `code.qmd`: Finalized script for cleaning, analyzing, and visualizing data.
-- `proposal.qmd`: Contains the initial project proposal document.
+- `dashboard.qmd`: Our interactive heatmap are displayed here and can be sorted by tabs for comparisons. 
+- `RegressionDashboard.qmd`: Contains all the regression plots and tables.
+- `EDADashboard.qmd`: Supplemental infographics from our EDA will be here.
 - `about.qmd`: Team members information for this project. 
 - `images`: Visualizations we created and used.
 - `_quarto.yml`: File to set up Quarto wesbite & dashboard.
