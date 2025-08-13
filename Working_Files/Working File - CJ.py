@@ -5,6 +5,8 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 import json
 from urllib.request import urlopen
+import plotly.graph_objects as go
+import urllib.request
 import plotly.express as px
 
 FARA = pd.read_csv('../data/FARA.csv')
@@ -64,17 +66,47 @@ ax7 = Merged.plot.scatter(x = 'Housing by pop', y = 'CANCER_CrudePrev')
 ### New comparisons against obesity/Diabetes
 
 ax8 = Merged.plot.scatter(x = 'TEETHLOST_CrudePrev', y = 'DIABETES_CrudePrev')
+ax8.set_title("Number of Teeth Lost vs. Diabetes prevalence")
+ax8.set_xlabel("Number of Teeth Lost")
+ax8.set_ylabel("Diabetes Prevalence")
+plt.show()
 ax9 = Merged.plot.scatter(x = 'TEETHLOST_CrudePrev', y = 'OBESITY_CrudePrev')
-ax10 = Merged.plot.scatter(x = 'Housing by pop', y = 'DIABETES_CrudePrev')
-ax11 = Merged.plot.scatter(x = 'Housing by pop', y = 'OBESITY_CrudePrev')
-ax12 = Merged.plot.scatter(x = 'ACCESS2_CrudePrev', y = 'DIABETES_CrudePrev')
-ax13 = Merged.plot.scatter(x = 'ACCESS2_CrudePrev', y = 'OBESITY_CrudePrev')
-ax14 = Merged.plot.scatter(x = 'DENTAL_CrudePrev', y = 'DIABETES_CrudePrev')
-ax15 = Merged.plot.scatter(x = 'DENTAL_CrudePrev', y = 'OBESITY_CrudePrev')
-ax16 = Merged.plot.scatter(x = 'PovertyRate', y = 'DIABETES_CrudePrev')
-ax17 = Merged.plot.scatter(x = 'PovertyRate', y = 'OBESITY_CrudePrev')
-ax18 = Merged.plot.scatter(x = 'MedianFamilyIncome', y = 'DIABETES_CrudePrev')
-ax19 = Merged.plot.scatter(x = 'MedianFamilyIncome', y = 'OBESITY_CrudePrev')
+ax9.set_title("Number of Teeth Lost vs. Obesity prevalence")
+ax9.set_xlabel("Number of Teeth Lost")
+ax9.set_ylabel("Obesity Prevalence")
+plt.show()
+ax12 = Merged.plot.scatter(x = 'ACCESS2_CrudePrev', y = 'DIABETES_CrudePrev', color = 'blue')
+ax12.set_title("Lack Of Access to Healthcare vs. Diabetes Prevalence")
+ax12.set_xlabel("Lack of Access to Healthcare")
+ax12.set_ylabel("Diabetes Prevalence")
+plt.show()
+ax13 = Merged.plot.scatter(x = 'ACCESS2_CrudePrev', y = 'OBESITY_CrudePrev', color = 'blue')
+ax13.set_title("Lack Of Access to Healthcare vs. Obesity Prevalence")
+ax13.set_xlabel("Lack of Access to Healthcare")
+ax13.set_ylabel("Obesity Prevalence")
+plt.show()
+#ax14 = Merged.plot.scatter(x = 'DENTAL_CrudePrev', y = 'DIABETES_CrudePrev')
+#ax14.set_title("Prevalence of Recent Dental Visits vs. Diabetes Prevalence")
+#ax14.set_xlabel("Dental Visit Prevalence")
+#ax14.set_ylabel("Diabetes Prevalence")
+#plt.show()
+#ax15 = Merged.plot.scatter(x = 'DENTAL_CrudePrev', y = 'OBESITY_CrudePrev')
+#ax15.set_title("Prevalence of Recent Dental Visits vs. Obesity Prevalence")
+#ax15.set_xlabel("Dental Visit Prevalence")
+#ax15.set_ylabel("Obesity Prevalence")
+#plt.show()
+##ax16 = Merged.plot.scatter(x = 'PovertyRate', y = 'DIABETES_CrudePrev')
+##ax17 = Merged.plot.scatter(x = 'PovertyRate', y = 'OBESITY_CrudePrev')
+ax18 = Merged.plot.scatter(x = 'MedianFamilyIncome', y = 'DIABETES_CrudePrev', color = 'purple')
+ax18.set_title("Median Family Income vs. Diabetes Prevalence")
+ax18.set_xlabel("Median Family Income")
+ax18.set_ylabel("Obesity Prevalence")
+plt.show()
+ax19 = Merged.plot.scatter(x = 'MedianFamilyIncome', y = 'OBESITY_CrudePrev', color = 'purple')
+ax19.set_title("Median Family Income vs. Obesity Prevalence")
+ax19.set_xlabel("Median Family Income")
+ax19.set_ylabel("Obesity Prevalence")
+plt.show()
 ### New Time Based Analysis
 
 PLACES2020 = pd.read_csv('../data/PLACES.csv')
@@ -335,20 +367,20 @@ Merged_By_Race['HispanicObesity'] = Merged_By_Race['TractHispanic'] * Merged_By_
 Merged_By_Race['HispanicNoDiabetes'] = Merged_By_Race['TractHispanic'] * (100-Merged_By_Race['DIABETES_CrudePrev'])/100
 Merged_By_Race['HispanicNoObesity'] = Merged_By_Race['TractHispanic'] * (100-Merged_By_Race['OBESITY_CrudePrev'])/100
 Merged_By_Race = Merged_By_Race.groupby('CountyName').sum()
-Merged_By_Race['%WhiteDiabetes'] = Merged_By_Race['WhiteDiabetes']/Merged_By_Race['TractWhite']
-Merged_By_Race['%WhiteObesity'] = Merged_By_Race['WhiteObesity']/Merged_By_Race['TractWhite']
-Merged_By_Race['%BlackDiabetes'] = Merged_By_Race['BlackDiabetes']/Merged_By_Race['TractBlack']
-Merged_By_Race['%BlackObesity'] = Merged_By_Race['BlackObesity']/Merged_By_Race['TractBlack']
-Merged_By_Race['%AsianDiabetes'] = Merged_By_Race['AsianDiabetes']/Merged_By_Race['TractAsian']
-Merged_By_Race['%AsianObesity'] = Merged_By_Race['AsianObesity']/Merged_By_Race['TractAsian']
-Merged_By_Race['%NHOPIDiabetes'] = Merged_By_Race['NHOPIDiabetes']/Merged_By_Race['TractNHOPI']
-Merged_By_Race['%NHOPIObesity'] = Merged_By_Race['NHOPIObesity']/Merged_By_Race['TractNHOPI']
-Merged_By_Race['%AIANDiabetes'] = Merged_By_Race['AIANDiabetes']/Merged_By_Race['TractAIAN']
-Merged_By_Race['%AIANObesity'] = Merged_By_Race['AIANObesity']/Merged_By_Race['TractAIAN']
-Merged_By_Race['%OMultirDiabetes'] = Merged_By_Race['OMultirDiabetes']/Merged_By_Race['TractOMultir']
-Merged_By_Race['%OMultirObesity'] = Merged_By_Race['OMultirObesity']/Merged_By_Race['TractOMultir']
-Merged_By_Race['%HispanicDiabetes'] = Merged_By_Race['HispanicDiabetes']/Merged_By_Race['TractHispanic']
-Merged_By_Race['%HispanicObesity'] = Merged_By_Race['HispanicObesity']/Merged_By_Race['TractHispanic']
+Merged_By_Race['%WhiteDiabetes'] = Merged_By_Race['WhiteDiabetes']/Merged_By_Race['TractWhite']*100
+Merged_By_Race['%WhiteObesity'] = Merged_By_Race['WhiteObesity']/Merged_By_Race['TractWhite']*100
+Merged_By_Race['%BlackDiabetes'] = Merged_By_Race['BlackDiabetes']/Merged_By_Race['TractBlack']*100
+Merged_By_Race['%BlackObesity'] = Merged_By_Race['BlackObesity']/Merged_By_Race['TractBlack']*100
+Merged_By_Race['%AsianDiabetes'] = Merged_By_Race['AsianDiabetes']/Merged_By_Race['TractAsian']*100
+Merged_By_Race['%AsianObesity'] = Merged_By_Race['AsianObesity']/Merged_By_Race['TractAsian']*100
+Merged_By_Race['%NHOPIDiabetes'] = Merged_By_Race['NHOPIDiabetes']/Merged_By_Race['TractNHOPI']*100
+Merged_By_Race['%NHOPIObesity'] = Merged_By_Race['NHOPIObesity']/Merged_By_Race['TractNHOPI']*100
+Merged_By_Race['%AIANDiabetes'] = Merged_By_Race['AIANDiabetes']/Merged_By_Race['TractAIAN']*100
+Merged_By_Race['%AIANObesity'] = Merged_By_Race['AIANObesity']/Merged_By_Race['TractAIAN']*100
+Merged_By_Race['%OMultirDiabetes'] = Merged_By_Race['OMultirDiabetes']/Merged_By_Race['TractOMultir']*100
+Merged_By_Race['%OMultirObesity'] = Merged_By_Race['OMultirObesity']/Merged_By_Race['TractOMultir']*100
+Merged_By_Race['%HispanicDiabetes'] = Merged_By_Race['HispanicDiabetes']/Merged_By_Race['TractHispanic']*100
+Merged_By_Race['%HispanicObesity'] = Merged_By_Race['HispanicObesity']/Merged_By_Race['TractHispanic']*100
 Merged_By_Race['year'] = '2018'
 Merged_By_Race
 
@@ -388,20 +420,20 @@ Merged_By_Race_2021['HispanicObesity'] = Merged_By_Race_2021['TractHispanic'] * 
 Merged_By_Race_2021['HispanicNoDiabetes'] = Merged_By_Race_2021['TractHispanic'] * (100-Merged_By_Race_2021['DIABETES_CrudePrev'])/100
 Merged_By_Race_2021['HispanicNoObesity'] = Merged_By_Race_2021['TractHispanic'] * (100-Merged_By_Race_2021['OBESITY_CrudePrev'])/100
 Merged_By_Race_2021 = Merged_By_Race_2021.groupby('CountyName').sum()
-Merged_By_Race_2021['%WhiteDiabetes'] = Merged_By_Race_2021['WhiteDiabetes']/Merged_By_Race_2021['TractWhite']
-Merged_By_Race_2021['%WhiteObesity'] = Merged_By_Race_2021['WhiteObesity']/Merged_By_Race_2021['TractWhite']
-Merged_By_Race_2021['%BlackDiabetes'] = Merged_By_Race_2021['BlackDiabetes']/Merged_By_Race_2021['TractBlack']
-Merged_By_Race_2021['%BlackObesity'] = Merged_By_Race_2021['BlackObesity']/Merged_By_Race_2021['TractBlack']
-Merged_By_Race_2021['%AsianDiabetes'] = Merged_By_Race_2021['AsianDiabetes']/Merged_By_Race_2021['TractAsian']
-Merged_By_Race_2021['%AsianObesity'] = Merged_By_Race_2021['AsianObesity']/Merged_By_Race_2021['TractAsian']
-Merged_By_Race_2021['%NHOPIDiabetes'] = Merged_By_Race_2021['NHOPIDiabetes']/Merged_By_Race_2021['TractNHOPI']
-Merged_By_Race_2021['%NHOPIObesity'] = Merged_By_Race_2021['NHOPIObesity']/Merged_By_Race_2021['TractNHOPI']
-Merged_By_Race_2021['%AIANDiabetes'] = Merged_By_Race_2021['AIANDiabetes']/Merged_By_Race_2021['TractAIAN']
-Merged_By_Race_2021['%AIANObesity'] = Merged_By_Race_2021['AIANObesity']/Merged_By_Race_2021['TractAIAN']
-Merged_By_Race_2021['%OMultirDiabetes'] = Merged_By_Race_2021['OMultirDiabetes']/Merged_By_Race_2021['TractOMultir']
-Merged_By_Race_2021['%OMultirObesity'] = Merged_By_Race_2021['OMultirObesity']/Merged_By_Race_2021['TractOMultir']
-Merged_By_Race_2021['%HispanicDiabetes'] = Merged_By_Race_2021['HispanicDiabetes']/Merged_By_Race_2021['TractHispanic']
-Merged_By_Race_2021['%HispanicObesity'] = Merged_By_Race_2021['HispanicObesity']/Merged_By_Race_2021['TractHispanic']
+Merged_By_Race_2021['%WhiteDiabetes'] = Merged_By_Race_2021['WhiteDiabetes']/Merged_By_Race_2021['TractWhite']*100
+Merged_By_Race_2021['%WhiteObesity'] = Merged_By_Race_2021['WhiteObesity']/Merged_By_Race_2021['TractWhite']*100
+Merged_By_Race_2021['%BlackDiabetes'] = Merged_By_Race_2021['BlackDiabetes']/Merged_By_Race_2021['TractBlack']*100
+Merged_By_Race_2021['%BlackObesity'] = Merged_By_Race_2021['BlackObesity']/Merged_By_Race_2021['TractBlack']*100
+Merged_By_Race_2021['%AsianDiabetes'] = Merged_By_Race_2021['AsianDiabetes']/Merged_By_Race_2021['TractAsian']*100
+Merged_By_Race_2021['%AsianObesity'] = Merged_By_Race_2021['AsianObesity']/Merged_By_Race_2021['TractAsian']*100
+Merged_By_Race_2021['%NHOPIDiabetes'] = Merged_By_Race_2021['NHOPIDiabetes']/Merged_By_Race_2021['TractNHOPI']*100
+Merged_By_Race_2021['%NHOPIObesity'] = Merged_By_Race_2021['NHOPIObesity']/Merged_By_Race_2021['TractNHOPI']*100
+Merged_By_Race_2021['%AIANDiabetes'] = Merged_By_Race_2021['AIANDiabetes']/Merged_By_Race_2021['TractAIAN']*100
+Merged_By_Race_2021['%AIANObesity'] = Merged_By_Race_2021['AIANObesity']/Merged_By_Race_2021['TractAIAN']*100
+Merged_By_Race_2021['%OMultirDiabetes'] = Merged_By_Race_2021['OMultirDiabetes']/Merged_By_Race_2021['TractOMultir']*100
+Merged_By_Race_2021['%OMultirObesity'] = Merged_By_Race_2021['OMultirObesity']/Merged_By_Race_2021['TractOMultir']*100
+Merged_By_Race_2021['%HispanicDiabetes'] = Merged_By_Race_2021['HispanicDiabetes']/Merged_By_Race_2021['TractHispanic']*100
+Merged_By_Race_2021['%HispanicObesity'] = Merged_By_Race_2021['HispanicObesity']/Merged_By_Race_2021['TractHispanic']*100
 Merged_By_Race_2021['year'] = '2019'
 Merged_By_Race_2021
 
@@ -439,20 +471,20 @@ Merged_By_Race_2022['HispanicObesity'] = Merged_By_Race_2022['TractHispanic'] * 
 Merged_By_Race_2022['HispanicNoDiabetes'] = Merged_By_Race_2022['TractHispanic'] * (100-Merged_By_Race_2022['DIABETES_CrudePrev'])/100
 Merged_By_Race_2022['HispanicNoObesity'] = Merged_By_Race_2022['TractHispanic'] * (100-Merged_By_Race_2022['OBESITY_CrudePrev'])/100
 Merged_By_Race_2022 = Merged_By_Race_2022.groupby('CountyName').sum()
-Merged_By_Race_2022['%WhiteDiabetes'] = Merged_By_Race_2022['WhiteDiabetes']/Merged_By_Race_2022['TractWhite']
-Merged_By_Race_2022['%WhiteObesity'] = Merged_By_Race_2022['WhiteObesity']/Merged_By_Race_2022['TractWhite']
-Merged_By_Race_2022['%BlackDiabetes'] = Merged_By_Race_2022['BlackDiabetes']/Merged_By_Race_2022['TractBlack']
-Merged_By_Race_2022['%BlackObesity'] = Merged_By_Race_2022['BlackObesity']/Merged_By_Race_2022['TractBlack']
-Merged_By_Race_2022['%AsianDiabetes'] = Merged_By_Race_2022['AsianDiabetes']/Merged_By_Race_2022['TractAsian']
-Merged_By_Race_2022['%AsianObesity'] = Merged_By_Race_2022['AsianObesity']/Merged_By_Race_2022['TractAsian']
-Merged_By_Race_2022['%NHOPIDiabetes'] = Merged_By_Race_2022['NHOPIDiabetes']/Merged_By_Race_2022['TractNHOPI']
-Merged_By_Race_2022['%NHOPIObesity'] = Merged_By_Race_2022['NHOPIObesity']/Merged_By_Race_2022['TractNHOPI']
-Merged_By_Race_2022['%AIANDiabetes'] = Merged_By_Race_2022['AIANDiabetes']/Merged_By_Race_2022['TractAIAN']
-Merged_By_Race_2022['%AIANObesity'] = Merged_By_Race_2022['AIANObesity']/Merged_By_Race_2022['TractAIAN']
-Merged_By_Race_2022['%OMultirDiabetes'] = Merged_By_Race_2022['OMultirDiabetes']/Merged_By_Race_2022['TractOMultir']
-Merged_By_Race_2022['%OMultirObesity'] = Merged_By_Race_2022['OMultirObesity']/Merged_By_Race_2022['TractOMultir']
-Merged_By_Race_2022['%HispanicDiabetes'] = Merged_By_Race_2022['HispanicDiabetes']/Merged_By_Race_2022['TractHispanic']
-Merged_By_Race_2022['%HispanicObesity'] = Merged_By_Race_2022['HispanicObesity']/Merged_By_Race_2022['TractHispanic']
+Merged_By_Race_2022['%WhiteDiabetes'] = Merged_By_Race_2022['WhiteDiabetes']/Merged_By_Race_2022['TractWhite']*100
+Merged_By_Race_2022['%WhiteObesity'] = Merged_By_Race_2022['WhiteObesity']/Merged_By_Race_2022['TractWhite']*100
+Merged_By_Race_2022['%BlackDiabetes'] = Merged_By_Race_2022['BlackDiabetes']/Merged_By_Race_2022['TractBlack']*100
+Merged_By_Race_2022['%BlackObesity'] = Merged_By_Race_2022['BlackObesity']/Merged_By_Race_2022['TractBlack']*100
+Merged_By_Race_2022['%AsianDiabetes'] = Merged_By_Race_2022['AsianDiabetes']/Merged_By_Race_2022['TractAsian']*100
+Merged_By_Race_2022['%AsianObesity'] = Merged_By_Race_2022['AsianObesity']/Merged_By_Race_2022['TractAsian']*100
+Merged_By_Race_2022['%NHOPIDiabetes'] = Merged_By_Race_2022['NHOPIDiabetes']/Merged_By_Race_2022['TractNHOPI']*100
+Merged_By_Race_2022['%NHOPIObesity'] = Merged_By_Race_2022['NHOPIObesity']/Merged_By_Race_2022['TractNHOPI']*100
+Merged_By_Race_2022['%AIANDiabetes'] = Merged_By_Race_2022['AIANDiabetes']/Merged_By_Race_2022['TractAIAN']*100
+Merged_By_Race_2022['%AIANObesity'] = Merged_By_Race_2022['AIANObesity']/Merged_By_Race_2022['TractAIAN']*100
+Merged_By_Race_2022['%OMultirDiabetes'] = Merged_By_Race_2022['OMultirDiabetes']/Merged_By_Race_2022['TractOMultir']*100
+Merged_By_Race_2022['%OMultirObesity'] = Merged_By_Race_2022['OMultirObesity']/Merged_By_Race_2022['TractOMultir']*100
+Merged_By_Race_2022['%HispanicDiabetes'] = Merged_By_Race_2022['HispanicDiabetes']/Merged_By_Race_2022['TractHispanic']*100
+Merged_By_Race_2022['%HispanicObesity'] = Merged_By_Race_2022['HispanicObesity']/Merged_By_Race_2022['TractHispanic']*100
 Merged_By_Race_2022['year'] = '2020'
 Merged_By_Race_2022
 
@@ -490,20 +522,20 @@ Merged_By_Race_2023['HispanicObesity'] = Merged_By_Race_2023['TractHispanic'] * 
 Merged_By_Race_2023['HispanicNoDiabetes'] = Merged_By_Race_2023['TractHispanic'] * (100-Merged_By_Race_2023['DIABETES_CrudePrev'])/100
 Merged_By_Race_2023['HispanicNoObesity'] = Merged_By_Race_2023['TractHispanic'] * (100-Merged_By_Race_2023['OBESITY_CrudePrev'])/100
 Merged_By_Race_2023 = Merged_By_Race_2023.groupby('CountyName').sum()
-Merged_By_Race_2023['%WhiteDiabetes'] = Merged_By_Race_2023['WhiteDiabetes']/Merged_By_Race_2023['TractWhite']
-Merged_By_Race_2023['%WhiteObesity'] = Merged_By_Race_2023['WhiteObesity']/Merged_By_Race_2023['TractWhite']
-Merged_By_Race_2023['%BlackDiabetes'] = Merged_By_Race_2023['BlackDiabetes']/Merged_By_Race_2023['TractBlack']
-Merged_By_Race_2023['%BlackObesity'] = Merged_By_Race_2023['BlackObesity']/Merged_By_Race_2023['TractBlack']
-Merged_By_Race_2023['%AsianDiabetes'] = Merged_By_Race_2023['AsianDiabetes']/Merged_By_Race_2023['TractAsian']
-Merged_By_Race_2023['%AsianObesity'] = Merged_By_Race_2023['AsianObesity']/Merged_By_Race_2023['TractAsian']
-Merged_By_Race_2023['%NHOPIDiabetes'] = Merged_By_Race_2023['NHOPIDiabetes']/Merged_By_Race_2023['TractNHOPI']
-Merged_By_Race_2023['%NHOPIObesity'] = Merged_By_Race_2023['NHOPIObesity']/Merged_By_Race_2023['TractNHOPI']
-Merged_By_Race_2023['%AIANDiabetes'] = Merged_By_Race_2023['AIANDiabetes']/Merged_By_Race_2023['TractAIAN']
-Merged_By_Race_2023['%AIANObesity'] = Merged_By_Race_2023['AIANObesity']/Merged_By_Race_2023['TractAIAN']
-Merged_By_Race_2023['%OMultirDiabetes'] = Merged_By_Race_2023['OMultirDiabetes']/Merged_By_Race_2023['TractOMultir']
-Merged_By_Race_2023['%OMultirObesity'] = Merged_By_Race_2023['OMultirObesity']/Merged_By_Race_2023['TractOMultir']
-Merged_By_Race_2023['%HispanicDiabetes'] = Merged_By_Race_2023['HispanicDiabetes']/Merged_By_Race_2023['TractHispanic']
-Merged_By_Race_2023['%HispanicObesity'] = Merged_By_Race_2023['HispanicObesity']/Merged_By_Race_2023['TractHispanic']
+Merged_By_Race_2023['%WhiteDiabetes'] = Merged_By_Race_2023['WhiteDiabetes']/Merged_By_Race_2023['TractWhite']*100
+Merged_By_Race_2023['%WhiteObesity'] = Merged_By_Race_2023['WhiteObesity']/Merged_By_Race_2023['TractWhite']*100
+Merged_By_Race_2023['%BlackDiabetes'] = Merged_By_Race_2023['BlackDiabetes']/Merged_By_Race_2023['TractBlack']*100
+Merged_By_Race_2023['%BlackObesity'] = Merged_By_Race_2023['BlackObesity']/Merged_By_Race_2023['TractBlack']*100
+Merged_By_Race_2023['%AsianDiabetes'] = Merged_By_Race_2023['AsianDiabetes']/Merged_By_Race_2023['TractAsian']*100
+Merged_By_Race_2023['%AsianObesity'] = Merged_By_Race_2023['AsianObesity']/Merged_By_Race_2023['TractAsian']*100
+Merged_By_Race_2023['%NHOPIDiabetes'] = Merged_By_Race_2023['NHOPIDiabetes']/Merged_By_Race_2023['TractNHOPI']*100
+Merged_By_Race_2023['%NHOPIObesity'] = Merged_By_Race_2023['NHOPIObesity']/Merged_By_Race_2023['TractNHOPI']*100
+Merged_By_Race_2023['%AIANDiabetes'] = Merged_By_Race_2023['AIANDiabetes']/Merged_By_Race_2023['TractAIAN']*100
+Merged_By_Race_2023['%AIANObesity'] = Merged_By_Race_2023['AIANObesity']/Merged_By_Race_2023['TractAIAN']*100
+Merged_By_Race_2023['%OMultirDiabetes'] = Merged_By_Race_2023['OMultirDiabetes']/Merged_By_Race_2023['TractOMultir']*100
+Merged_By_Race_2023['%OMultirObesity'] = Merged_By_Race_2023['OMultirObesity']/Merged_By_Race_2023['TractOMultir']*100
+Merged_By_Race_2023['%HispanicDiabetes'] = Merged_By_Race_2023['HispanicDiabetes']/Merged_By_Race_2023['TractHispanic']*100
+Merged_By_Race_2023['%HispanicObesity'] = Merged_By_Race_2023['HispanicObesity']/Merged_By_Race_2023['TractHispanic']*100
 Merged_By_Race_2023['year'] = '2021'
 Merged_By_Race_2023
 
@@ -541,20 +573,20 @@ Merged_By_Race_2024['HispanicObesity'] = Merged_By_Race_2024['TractHispanic'] * 
 Merged_By_Race_2024['HispanicNoDiabetes'] = Merged_By_Race_2024['TractHispanic'] * (100-Merged_By_Race_2024['DIABETES_CrudePrev'])/100
 Merged_By_Race_2024['HispanicNoObesity'] = Merged_By_Race_2024['TractHispanic'] * (100-Merged_By_Race_2024['OBESITY_CrudePrev'])/100
 Merged_By_Race_2024 = Merged_By_Race_2024.groupby('CountyName').sum()
-Merged_By_Race_2024['%WhiteDiabetes'] = Merged_By_Race_2024['WhiteDiabetes']/Merged_By_Race_2024['TractWhite']
-Merged_By_Race_2024['%WhiteObesity'] = Merged_By_Race_2024['WhiteObesity']/Merged_By_Race_2024['TractWhite']
-Merged_By_Race_2024['%BlackDiabetes'] = Merged_By_Race_2024['BlackDiabetes']/Merged_By_Race_2024['TractBlack']
-Merged_By_Race_2024['%BlackObesity'] = Merged_By_Race_2024['BlackObesity']/Merged_By_Race_2024['TractBlack']
-Merged_By_Race_2024['%AsianDiabetes'] = Merged_By_Race_2024['AsianDiabetes']/Merged_By_Race_2024['TractAsian']
-Merged_By_Race_2024['%AsianObesity'] = Merged_By_Race_2024['AsianObesity']/Merged_By_Race_2024['TractAsian']
-Merged_By_Race_2024['%NHOPIDiabetes'] = Merged_By_Race_2024['NHOPIDiabetes']/Merged_By_Race_2024['TractNHOPI']
-Merged_By_Race_2024['%NHOPIObesity'] = Merged_By_Race_2024['NHOPIObesity']/Merged_By_Race_2024['TractNHOPI']
-Merged_By_Race_2024['%AIANDiabetes'] = Merged_By_Race_2024['AIANDiabetes']/Merged_By_Race_2024['TractAIAN']
-Merged_By_Race_2024['%AIANObesity'] = Merged_By_Race_2024['AIANObesity']/Merged_By_Race_2024['TractAIAN']
-Merged_By_Race_2024['%OMultirDiabetes'] = Merged_By_Race_2024['OMultirDiabetes']/Merged_By_Race_2024['TractOMultir']
-Merged_By_Race_2024['%OMultirObesity'] = Merged_By_Race_2024['OMultirObesity']/Merged_By_Race_2024['TractOMultir']
-Merged_By_Race_2024['%HispanicDiabetes'] = Merged_By_Race_2024['HispanicDiabetes']/Merged_By_Race_2024['TractHispanic']
-Merged_By_Race_2024['%HispanicObesity'] = Merged_By_Race_2024['HispanicObesity']/Merged_By_Race_2024['TractHispanic']
+Merged_By_Race_2024['%WhiteDiabetes'] = Merged_By_Race_2024['WhiteDiabetes']/Merged_By_Race_2024['TractWhite']*100
+Merged_By_Race_2024['%WhiteObesity'] = Merged_By_Race_2024['WhiteObesity']/Merged_By_Race_2024['TractWhite']*100
+Merged_By_Race_2024['%BlackDiabetes'] = Merged_By_Race_2024['BlackDiabetes']/Merged_By_Race_2024['TractBlack']*100
+Merged_By_Race_2024['%BlackObesity'] = Merged_By_Race_2024['BlackObesity']/Merged_By_Race_2024['TractBlack']*100
+Merged_By_Race_2024['%AsianDiabetes'] = Merged_By_Race_2024['AsianDiabetes']/Merged_By_Race_2024['TractAsian']*100
+Merged_By_Race_2024['%AsianObesity'] = Merged_By_Race_2024['AsianObesity']/Merged_By_Race_2024['TractAsian']*100
+Merged_By_Race_2024['%NHOPIDiabetes'] = Merged_By_Race_2024['NHOPIDiabetes']/Merged_By_Race_2024['TractNHOPI']*100
+Merged_By_Race_2024['%NHOPIObesity'] = Merged_By_Race_2024['NHOPIObesity']/Merged_By_Race_2024['TractNHOPI']*100
+Merged_By_Race_2024['%AIANDiabetes'] = Merged_By_Race_2024['AIANDiabetes']/Merged_By_Race_2024['TractAIAN']*100
+Merged_By_Race_2024['%AIANObesity'] = Merged_By_Race_2024['AIANObesity']/Merged_By_Race_2024['TractAIAN']*100
+Merged_By_Race_2024['%OMultirDiabetes'] = Merged_By_Race_2024['OMultirDiabetes']/Merged_By_Race_2024['TractOMultir']*100
+Merged_By_Race_2024['%OMultirObesity'] = Merged_By_Race_2024['OMultirObesity']/Merged_By_Race_2024['TractOMultir']*100
+Merged_By_Race_2024['%HispanicDiabetes'] = Merged_By_Race_2024['HispanicDiabetes']/Merged_By_Race_2024['TractHispanic']*100
+Merged_By_Race_2024['%HispanicObesity'] = Merged_By_Race_2024['HispanicObesity']/Merged_By_Race_2024['TractHispanic']*100
 Merged_By_Race_2024['year'] = '2022'
 Merged_By_Race_2024
 
@@ -564,6 +596,27 @@ Important_Columns = ['CountyName','year','%WhiteDiabetes','%WhiteObesity','%Blac
                      '%HispanicDiabetes','%HispanicObesity']
 Unioned_Data_By_Race = Concated_By_Race[Important_Columns]
 Unioned_Data_By_Race
+#Unioned_Data_By_Race.to_csv('Unioned_Data_By_Race.csv', index=False) #output file as a csv
+
+AGG_Columns_to_extract = ['year','%WhiteDiabetes','%WhiteObesity','%BlackDiabetes','%BlackObesity','%AsianDiabetes','%AsianObesity',
+                     '%NHOPIDiabetes','%NHOPIObesity','%AIANDiabetes','%AIANObesity','%OMultirDiabetes','%OMultirObesity',
+                     '%HispanicDiabetes','%HispanicObesity']
+Unioned_Data_By_Race2 = Unioned_Data_By_Race[AGG_Columns_to_extract]
+
+Unioned_Data_By_Race2
+
+AGG_DATA = Unioned_Data_By_Race2.groupby('year').agg(['mean','std'])
+
+def sem(x):
+    return x.std()/np.sqrt(len(x))
+
+AGG_DATA_SEM = Unioned_Data_By_Race2.groupby('year').agg(['mean',sem])
+AGG_DATA_SEM = AGG_DATA_SEM.rename(columns = {'sem': 'std_error_mean'})
+AGG_DATA_SEM
+
+
+## info for heatmap generation
+
 
 CountyFIPSCode = {'CountyName' : ['Apache','Cochise','Coconino','Gila','Graham','Greenlee','La Paz','Maricopa','Mohave','Navajo','Pima','Pinal','Santa Cruz','Yavapai','Yuma'], 'FIPS_Code' : ['04001','04003','04005','04007','04009','04011','04012','04013','04015','04017','04019','04021','04023','04025','04027']}
 CountyFIPSCode = pd.DataFrame(data = CountyFIPSCode)
@@ -572,43 +625,86 @@ CountyFIPSCode
 Unioned_Data_FIPS = pd.merge(Unioned_Data_By_Race, CountyFIPSCode, on = 'CountyName', how = 'left')
 Unioned_Data_FIPS
 
-
-
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties_geojson = json.load(response)
+mycustomdata = np.stack((Unioned_Data_FIPS['CountyName'],Unioned_Data_FIPS['%WhiteDiabetes'],Unioned_Data_FIPS['%BlackDiabetes']))
+
+
 
 fig1 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
-                    locations = 'FIPS_Code', color = '%AIANDiabetes',
-                    color_continuous_scale = "Viridis",scope = "usa",
-                    animation_frame = 'year',
-                    labels = {'%AIANDiabetes':'AIANDiabetes'},
-                    title = 'County Heatmap AIAN Diabetes',
-                    range_color = [0.1,0.25])
-fig1.show()
-
-fig2 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
-                    locations = 'FIPS_Code', color = '%AIANObesity',
-                    color_continuous_scale = "Viridis",scope = "usa",
-                    animation_frame = 'year',
-                    labels = {'%AIANObesity':'AIANObesity'},
-                    title = 'County Heatmap AIAN Obesity',
-                    range_color = [0.1,0.5])
-fig2.show()
-
-fig3 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
-                    locations = 'FIPS_Code', color = '%WhiteDiabetes',
-                    color_continuous_scale = "Viridis",scope = "usa",
-                    animation_frame = 'year',
-                    labels = {'%WhiteDiabetes':'WhiteDiabetes'},
-                    title = 'County Heatmap White Diabetes',
-                    range_color = [0.1,0.25])
-fig3.show()
-
-fig4 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
                     locations = 'FIPS_Code', color = '%WhiteObesity',
                     color_continuous_scale = "Viridis",scope = "usa",
                     animation_frame = 'year',
-                    labels = {'%WhiteObesity':'WhiteObesity'},
-                    title = 'County Heatmap White Obesity',
-                    range_color = [0.1,0.5])
-fig4.show()
+                    title = 'Arizona County Heatmap for Obesity Rates',
+                    labels = {'%WhiteObesity':'Obesity Rate'},
+                    range_color = [0.2,0.5],
+                    hover_data = ["CountyName"])
+
+fig1.update_geos(center = {"lat": 34.0489,"lon": -111.0937},
+                 projection_scale = 4,
+                 scope = "usa")
+fig1["layout"].pop("updatemenus") 
+box7 = dict(method = 'update', label = '%WhiteObesity', args = [{'z': [Unioned_Data_FIPS['%WhiteObesity']],'hovertemplate': 'County: %{customdata[0]}<br> Obesity: %{z}'}])
+box8 = dict(method = 'update', label = '%BlackObesity', args = [{'z': [Unioned_Data_FIPS['%BlackObesity']],'hovertemplate': 'County: %{customdata[0]}<br> Obesity: %{z}'}])
+box9 = dict(method = 'update', label = '%AsianObesity', args = [{'z': [Unioned_Data_FIPS['%AsianObesity']],'hovertemplate': 'County: %{customdata[0]}<br> Obesity: %{z}'}])
+box10 = dict(method = 'update', label = '%NHOPIObesity', args = [{'z': [Unioned_Data_FIPS['%NHOPIObesity']],'hovertemplate': 'County: %{customdata[0]}<br> Obesity: %{z}'}])
+box11 = dict(method = 'update', label = '%AIANObesity', args = [{'z': [Unioned_Data_FIPS['%AIANObesity']],'hovertemplate': 'County: %{customdata[0]}<br> Obesity: %{z}'}])
+box12 = dict(method = 'update', label = '%OMultirObesity', args = [{'z': [Unioned_Data_FIPS['%OMultirObesity']],'hovertemplate': 'County: %{customdata[0]}<br> Obesity: %{z}'}])
+
+
+fig1.update_layout(
+    updatemenus=[
+        dict(
+            active=0,
+            buttons=[box7,box8,box9,box10,box11,box12],
+            type = "dropdown",
+            direction="down",
+            showactive=False,
+            x=0.001,
+            xanchor="left",
+            y=1.2,
+            yanchor="top"
+        )
+    ]
+)
+
+fig1.show()
+
+fig2 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
+                    locations = 'FIPS_Code', color = '%WhiteDiabetes',
+                    color_continuous_scale = "Viridis",scope = "usa",
+                    animation_frame = 'year',
+                    title = 'Arizona County Heatmap for Diabetes Rates',
+                    labels = {'%WhiteDiabetes':'Diabetes Rate'},
+                    range_color = [0.1,0.25],
+                    hover_data = ["CountyName"])
+
+fig2.update_geos(center = {"lat": 34.0489,"lon": -111.0937},
+                 projection_scale = 4,
+                 scope = "usa")
+fig2["layout"].pop("updatemenus") 
+box1 = dict(method = 'update', label = '%WhiteDiabetes', args = [{'z': [Unioned_Data_FIPS['%WhiteDiabetes']],'hovertemplate': 'County: %{customdata[0]}<br> Diabetes: %{z}'}])
+box2 = dict(method = 'update', label = '%BlackDiabetes', args = [{'z': [Unioned_Data_FIPS['%BlackDiabetes']],'hovertemplate': 'County: %{customdata[0]}<br> Diabetes: %{z}'}])
+box3 = dict(method = 'update', label = '%AsianDiabetes', args = [{'z': [Unioned_Data_FIPS['%AsianDiabetes']],'hovertemplate': 'County: %{customdata[0]}<br> Diabetes: %{z}'}])
+box4 = dict(method = 'update', label = '%NHOPIDiabetes', args = [{'z': [Unioned_Data_FIPS['%NHOPIDiabetes']],'hovertemplate': 'County: %{customdata[0]}<br> Diabetes: %{z}'}])
+box5 = dict(method = 'update', label = '%AIANDiabetes', args = [{'z': [Unioned_Data_FIPS['%AIANDiabetes']],'hovertemplate': 'County: %{customdata[0]}<br> Diabetes: %{z}'}])
+box6 = dict(method = 'update', label = '%OMultirDiabetes', args = [{'z': [Unioned_Data_FIPS['%OMultirDiabetes']],'hovertemplate': 'County: %{customdata[0]}<br> Diabetes: %{z}'}])
+
+
+fig2.update_layout(
+    updatemenus=[
+        dict(
+            active=0,
+            buttons=[box1,box2,box3,box4,box5,box6],
+            type = "dropdown",
+            direction="down",
+            showactive=False,
+            x=0.001,
+            xanchor="left",
+            y=1.2,
+            yanchor="top"
+        )
+    ]
+)
+
+fig2.show()

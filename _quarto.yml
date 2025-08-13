@@ -16,6 +16,8 @@ website:
         href: about.qmd
       - text: Code
         href: code.qmd
+      - text: Heatmap/EDA
+        href: dashboard.qmd
 
 
 format:

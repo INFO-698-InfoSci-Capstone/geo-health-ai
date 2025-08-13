@@ -1,0 +1,23 @@
+---
+title: "GeoHealthAI"
+subtitle: "Dashboard"
+format: dashboard
+---
+
+## Row {height=50%}
+
+```{python}
+%run Diabetes_Dashboard_Python.py
+```
+```{python}
+%run Diabetes_Dashboard_Python.py
+```
+
+## Row {height=50%}
+
+```{python}
+%run Obesity_Dashboard_Python.py
+```
+```{python}
+%run Obesity_Dashboard_Python.py
+```
