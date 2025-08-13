@@ -6,7 +6,7 @@ editor: visual
 
 This capstone research project was developed for INFO 698 - Graduate Research Capstone at the University of Arizona, taught by Dr. Greg Chism. The team is comprised of the following team members:
 
--   Sarah Gilbride:
+-   Sarah Gilbride: Senior Data Analyst and Summer 2025 Graduate from the Masters of Information Science - Data Science Program. Looking to apply the skills and knowledge gained through this degree to current and future roles. 
 
 -   Remi Hendershott: Summer 2025 Graduate in the Masters of Information Science - Human-Centered Computing Degree Program. Upon graduation, seeking to find a role that combines my interests of health & data science with UX/UI design, resulting in making a positive impact.
 
