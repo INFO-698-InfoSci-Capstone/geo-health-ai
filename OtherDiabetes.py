@@ -25,7 +25,7 @@ mycustomdata = np.stack((Unioned_Data_FIPS['CountyName'], Unioned_Data_FIPS['%Wh
 
 
 fig1 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
-                    locations = 'FIPS_Code', color='%OmultirDiabetes',
+                    locations = 'FIPS_Code', color='%OMultirDiabetes',
                     color_continuous_scale = "Viridis",scope = "usa",
                     animation_frame = 'year',
                     title = 'Arizona County Heatmap Other Diabetes',
