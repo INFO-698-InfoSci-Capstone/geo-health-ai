@@ -1,11 +1,6 @@
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import LabelEncoder
 import json
 from urllib.request import urlopen
-import plotly.graph_objects as go
-import urllib.request
 import plotly.express as px
 
 Unioned_Data_By_Race = pd.read_csv('data/Unioned_Data_By_Race.csv')
@@ -20,7 +15,6 @@ Unioned_Data_FIPS = pd.merge(Unioned_Data_By_Race, CountyFIPSCode, on = 'CountyN
 
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties_geojson = json.load(response)
-mycustomdata = np.stack((Unioned_Data_FIPS['CountyName'], Unioned_Data_FIPS['%WhiteDiabetes'], Unioned_Data_FIPS['%BlackDiabetes']))
 
 
 
@@ -36,6 +30,5 @@ fig1 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
 fig1.update_geos(center = {"lat": 34.0489,"lon": -111.0937},
                  projection_scale = 4,
                  scope = "usa")
-fig1["layout"].pop("updatemenus") 
 
 fig1.show()
