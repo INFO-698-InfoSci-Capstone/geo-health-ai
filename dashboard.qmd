@@ -46,19 +46,6 @@ format: dashboard
 %run AmericanIndianDiabetes.py
 ```
 
-#### Tab 5
-```{python}
-#| title: Native Hawaiian Diabetes
-%run NativeHawaiianDiabetes.py
-```
-
-#### Tab 6
-```{python}
-#| title: Other Diabetes
-%run OtherDiabetes.py
-```
-
-
 ### Row 2, Col 2 {.tabset}
 #### Tab 1
 ```{python}
@@ -82,16 +69,4 @@ format: dashboard
 ```{python}
 #| title: American Indian Obesity
 %run AmericanIndianObesity.py
-```
-
-#### Tab 5
-```{python}
-#| title: Native Hawaiian Obesity
-%run NativeHawaiianObesity.py
-```
-
-#### Tab 6
-```{python}
-#| title: Other Obesity
-%run OtherObesity.py
 ```
