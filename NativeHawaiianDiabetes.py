@@ -8,7 +8,7 @@ import plotly.graph_objects as go
 import urllib.request
 import plotly.express as px
 
-Unioned_Data_By_Race = pd.read_csv('../data/Unioned_Data_By_Race.csv')
+Unioned_Data_By_Race = pd.read_csv('data/Unioned_Data_By_Race.csv')
 
 ## info for heatmap generation
 
