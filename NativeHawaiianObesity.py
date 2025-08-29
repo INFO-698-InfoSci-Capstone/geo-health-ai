@@ -31,9 +31,7 @@ fig1 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
                     title = 'Arizona County Heatmap Native Hawaiian and Pacific Islander Obesity',
                     labels = {'%NHOPIObesity':'Obesity<br>Percent'},
                     range_color = [20,50],
-                    hover_data = ["CountyName"],
-                    width = 900,
-                    height = 350)
+                    hover_data = ["CountyName"])
 
 fig1.update_geos(center = {"lat": 34.0489,"lon": -111.0937},
                  projection_scale = 4,

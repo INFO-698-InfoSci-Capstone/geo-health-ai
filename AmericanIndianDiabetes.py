@@ -31,9 +31,7 @@ fig1 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
                     title = 'Arizona County Heatmap American Indian and Alaskan Native Diabetes',
                     labels = {'%AIANDiabetes':'Diabetes<br>Percent'},
                     range_color = [10,25],
-                    hover_data = ["CountyName"],
-                    width = 900,
-                    height = 350)
+                    hover_data = ["CountyName"])
 
 fig1.update_geos(center = {"lat": 34.0489,"lon": -111.0937},
                  projection_scale = 4,
