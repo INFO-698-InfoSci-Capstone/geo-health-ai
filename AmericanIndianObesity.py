@@ -18,6 +18,7 @@ Unioned_Data_FIPS = pd.merge(Unioned_Data_By_Race, CountyFIPSCode, on = 'CountyN
 with urlopen('https://raw.githubusercontent.com/plotly/datasets/master/geojson-counties-fips.json') as response:
     counties_geojson = json.load(response)
 
+arizona_counties = counties_geojson[counties_geojson['STATE'] == '04']
 
 
 fig1 = px.choropleth(Unioned_Data_FIPS, geojson = counties_geojson,
