@@ -22,7 +22,7 @@ website:
 
 format:
   html:
-    embed-resources: true
+    embed-resources: false
     keep-shiny: true
     theme:
       light: flatly
