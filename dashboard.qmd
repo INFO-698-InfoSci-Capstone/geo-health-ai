@@ -7,80 +7,17 @@ format: dashboard
 
 ## Column 1 {width = "50%"}
 
-### Row 1, Col 1 {.tabset}
-#### Tab 1
-```{python}
-#| title: White Diabetes
-%run WhiteDiabetes.py
-```
-
-#### Tab 2
-```{python}
-#| title: Black Diabetes
-%run BlackDiabetes.py
-```
-
-#### Tab 3
-```{python}
-#| title: Asian Diabetes
-%run AsianDiabetes.py
-```
-
-#### Tab 4
+### Row 1, Col 1
 ```{python}
 #| title: American Indian Diabetes
 %run AmericanIndianDiabetes.py
 ```
 
-#### Tab 5
-```{python}
-#| title: Native Hawaiian Diabetes
-%run NativeHawaiianDiabetes.py
-```
-
-#### Tab 6
-```{python}
-#| title: Other Diabetes
-%run OtherDiabetes.py
-```
-
-### Row 2, Col 1 {.tabset}
-#### Tab 1
-```{python}
-#| title: White Obesity
-%run WhiteObesity.py
-```
-
-#### Tab 2
-```{python}
-#| title: Black Obesity
-%run BlackObesity.py
-```
-
-#### Tab 3
-```{python}
-#| title: Asian Obesity
-%run AsianObesity.py
-```
-
-#### Tab 4
+### Row 2, Col 1
 ```{python}
 #| title: American Indian Obesity
 %run AmericanIndianObesity.py
 ```
-
-#### Tab 5
-```{python}
-#| title: Native Hawaiian Obesity
-%run NativeHawaiianObesity.py
-```
-
-#### Tab 6
-```{python}
-#| title: Other Obesity
-%run OtherObesity.py
-```
-
 
 ## Column 2 {width = "50%"}
 
